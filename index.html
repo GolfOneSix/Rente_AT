@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dossier Déplafonnement Rente AT — Plan d'action</title>
+<style>
+  :root {
+    --navy: #1a2942;
+    --navy-light: #2a3f5f;
+    --gold: #c9a961;
+    --gold-light: #e0c890;
+    --paper: #f5f1e8;
+    --paper-dark: #ebe4d3;
+    --ink: #2b2b2b;
+    --rust: #a8553d;
+    --moss: #5a7a4f;
+    --shadow: rgba(26, 41, 66, 0.15);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: ‘Georgia’, ‘Garamond’, serif;
+background: var(–paper);
+color: var(–ink);
+min-height: 100vh;
+padding: 20px;
+line-height: 1.5;
+}
+
+.header {
+text-align: center;
+padding: 30px 20px 20px;
+border-bottom: 3px double var(–navy);
+margin-bottom: 40px;
+}
+
+h1 {
+font-size: 1.8em;
+color: var(–navy);
+font-weight: 700;
+letter-spacing: 0.5px;
+margin-bottom: 8px;
+}
+
+.subtitle {
+color: var(–navy-light);
+font-style: italic;
+font-size: 1em;
+}
+
+.legend {
+background: var(–paper-dark);
+border-left: 4px solid var(–gold);
+padding: 12px 18px;
+margin: 20px auto;
+max-width: 700px;
+font-size: 0.9em;
+}
+
+.timeline {
+max-width: 1100px;
+margin: 0 auto;
+}
+
+.phase {
+margin-bottom: 50px;
+}
+
+.phase-title {
+font-size: 1.3em;
+color: var(–navy);
+text-transform: uppercase;
+letter-spacing: 2px;
+padding: 10px 0;
+border-bottom: 2px solid var(–gold);
+margin-bottom: 25px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.phase-number {
+background: var(–navy);
+color: var(–paper);
+width: 36px;
+height: 36px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+font-size: 1.1em;
+flex-shrink: 0;
+}
+
+.cards {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: 20px;
+}
+
+.card {
+background: white;
+border: 1px solid var(–paper-dark);
+border-radius: 4px;
+box-shadow: 0 2px 8px var(–shadow);
+overflow: hidden;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 16px var(–shadow);
+}
+
+.card.urgent { border-left: 5px solid var(–rust); }
+.card.medium { border-left: 5px solid var(–gold); }
+.card.low    { border-left: 5px solid var(–moss); }
+.card.done   { border-left: 5px solid var(–navy); opacity: 0.7; }
+
+.card-header {
+padding: 15px 20px;
+background: linear-gradient(to bottom, var(–paper) 0%, white 100%);
+border-bottom: 1px solid var(–paper-dark);
+cursor: pointer;
+user-select: none;
+}
+
+.card-title {
+font-weight: bold;
+color: var(–navy);
+font-size: 1.05em;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.card-meta {
+font-size: 0.8em;
+color: var(–navy-light);
+margin-top: 5px;
+font-style: italic;
+}
+
+.badge {
+padding: 2px 10px;
+border-radius: 12px;
+font-size: 0.7em;
+font-weight: bold;
+text-transform: uppercase;
+letter-spacing: 1px;
+white-space: nowrap;
+}
+
+.badge.done { background: var(–moss); color: white; }
+.badge.wait { background: var(–gold); color: var(–navy); }
+.badge.go   { background: var(–rust); color: white; }
+
+.card-body {
+padding: 0 20px;
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.card.open .card-body {
+max-height: 5000px;
+padding: 20px;
+}
+
+.card-indicator {
+transition: transform 0.3s;
+color: var(–gold);
+font-size: 1.2em;
+display: inline-block;
+margin-top: 4px;
+}
+
+.card.open .card-indicator {
+transform: rotate(180deg);
+}
+
+.section {
+margin-bottom: 20px;
+}
+
+.section-label {
+font-size: 0.85em;
+color: var(–navy);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+font-weight: bold;
+margin-bottom: 8px;
+padding-bottom: 4px;
+border-bottom: 1px dotted var(–gold);
+}
+
+.checklist {
+list-style: none;
+}
+
+.checklist li {
+padding: 6px 0;
+display: flex;
+align-items: flex-start;
+gap: 10px;
+}
+
+.checklist input[type=“checkbox”] {
+margin-top: 4px;
+accent-color: var(–moss);
+cursor: pointer;
+flex-shrink: 0;
+}
+
+.checklist label {
+cursor: pointer;
+flex: 1;
+transition: color 0.2s;
+}
+
+.checklist input[type=“checkbox”]:checked + label {
+text-decoration: line-through;
+color: #999;
+}
+
+.contact-block {
+background: var(–paper);
+padding: 12px 15px;
+border-radius: 3px;
+border-left: 3px solid var(–gold);
+font-size: 0.92em;
+margin-bottom: 8px;
+}
+
+.contact-name {
+font-weight: bold;
+color: var(–navy);
+margin-bottom: 5px;
+}
+
+.contact-line {
+margin: 2px 0;
+color: var(–ink);
+}
+
+.contact-line strong {
+color: var(–navy-light);
+display: inline-block;
+min-width: 70px;
+}
+
+.contact-line a {
+color: var(–rust);
+text-decoration: none;
+}
+
+.contact-line a:hover {
+text-decoration: underline;
+}
+
+.warning {
+color: var(–rust);
+font-style: italic;
+font-size: 0.85em;
+}
+
+.doc-button {
+display: inline-block;
+background: var(–navy);
+color: var(–paper);
+padding: 8px 16px;
+border-radius: 3px;
+text-decoration: none;
+font-size: 0.9em;
+border: none;
+cursor: pointer;
+margin: 4px 4px 4px 0;
+font-family: inherit;
+letter-spacing: 0.5px;
+}
+
+.doc-button:hover { background: var(–navy-light); }
+
+.doc-button.gold {
+background: var(–gold);
+color: var(–navy);
+}
+
+.doc-button.gold:hover { background: var(–gold-light); }
+
+.note {
+font-size: 0.88em;
+color: var(–navy-light);
+background: var(–paper);
+padding: 10px 14px;
+border-left: 3px solid var(–navy-light);
+margin-top: 10px;
+font-style: italic;
+}
+
+/* Modal */
+.modal-overlay {
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;
+background: rgba(26, 41, 66, 0.85);
+display: none;
+align-items: flex-start;
+justify-content: center;
+z-index: 1000;
+padding: 20px;
+overflow-y: auto;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+background: var(–paper);
+border-radius: 4px;
+max-width: 800px;
+width: 100%;
+margin: 40px auto;
+box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+overflow: hidden;
+}
+
+.modal-header {
+background: var(–navy);
+color: var(–paper);
+padding: 18px 24px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.modal-title {
+font-size: 1.1em;
+font-weight: bold;
+letter-spacing: 0.5px;
+}
+
+.modal-close {
+background: none;
+border: none;
+color: var(–paper);
+font-size: 1.8em;
+cursor: pointer;
+padding: 0;
+line-height: 1;
+}
+
+.modal-body {
+padding: 30px;
+max-height: 70vh;
+overflow-y: auto;
+font-family: ‘Courier New’, monospace;
+font-size: 0.9em;
+line-height: 1.7;
+white-space: pre-wrap;
+background: white;
+}
+
+.modal-footer {
+background: var(–paper-dark);
+padding: 12px 24px;
+text-align: right;
+}
+
+.progress-bar {
+background: var(–paper-dark);
+height: 6px;
+border-radius: 3px;
+overflow: hidden;
+margin: 15px auto 30px;
+max-width: 700px;
+}
+
+.progress-fill {
+background: linear-gradient(to right, var(–moss), var(–gold));
+height: 100%;
+width: 0%;
+transition: width 0.5s;
+}
+
+.progress-label {
+text-align: center;
+font-size: 0.85em;
+color: var(–navy);
+font-style: italic;
+margin-bottom: 10px;
+}
+
+.footer {
+text-align: center;
+padding: 40px 20px 20px;
+color: var(–navy-light);
+font-style: italic;
+font-size: 0.85em;
+border-top: 1px solid var(–paper-dark);
+margin-top: 50px;
+}
+
+@media (max-width: 600px) {
+body { padding: 10px; }
+.cards { grid-template-columns: 1fr; }
+h1 { font-size: 1.4em; }
+.modal-body { padding: 20px; font-size: 0.85em; }
+}
+
+@media print {
+body { background: white; }
+.card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+.card-body { max-height: none !important; padding: 20px !important; }
+.card-indicator { display: none; }
+.doc-button { display: none; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <h1>Dossier Déplafonnement Rente AT</h1>
+  <div class="subtitle">Plan d'action — Jérôme Richy — Tableau de bord interactif</div>
+</div>
+
+<div class="legend">
+  <strong>Mode d'emploi :</strong> chaque fiche se déplie en cliquant dessus. Les cases à cocher sont sauvegardées automatiquement. Les courriers sont consultables et copiables. Tu peux imprimer ce document via Ctrl+P (Cmd+P sur Mac).
+</div>
+
+<div class="progress-label">Avancement global</div>
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<div class="timeline">
+
+  <!-- PHASE 1 -->
+
+  <div class="phase">
+    <div class="phase-title"><span class="phase-number">1</span>Cette semaine — Actions urgentes</div>
+    <div class="cards">
+
+```
+  <!-- CARD FGTB -->
+  <div class="card done" data-id="fgtb">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>🛡️ CGSP-Police / FGTB</span>
+        <span class="badge done">Fait ✓</span>
+      </div>
+      <div class="card-meta">Syndicat — Service juridique</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-fgtb-1" checked><label for="c-fgtb-1">Mail envoyé à info.admiliege@cgsp.be</label></li>
+          <li><input type="checkbox" id="c-fgtb-2" checked><label for="c-fgtb-2">Copie à Eddy (représentant national)</label></li>
+          <li><input type="checkbox" id="c-fgtb-3" checked><label for="c-fgtb-3">Copie à Patrick (délégué direct)</label></li>
+          <li><input type="checkbox" id="c-fgtb-4"><label for="c-fgtb-4">Appel téléphonique à Patrick pour appuyer</label></li>
+          <li><input type="checkbox" id="c-fgtb-5"><label for="c-fgtb-5">Préparer dossier numérique complet pour RDV</label></li>
+          <li><input type="checkbox" id="c-fgtb-6"><label for="c-fgtb-6">RDV avec service juridique CGSP</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Contacts</div>
+        <div class="contact-block">
+          <div class="contact-name">CGSP Admi Liège (secteur Police)</div>
+          <div class="contact-line"><strong>📍</strong> Place Saint-Paul, 7a — 4000 Liège</div>
+          <div class="contact-line"><strong>📞</strong> <a href="tel:042219777">04 221 97 77</a></div>
+          <div class="contact-line"><strong>✉️</strong> <a href="mailto:info.admiliege@cgsp.be">info.admiliege@cgsp.be</a></div>
+          <div class="contact-line"><strong>🌐</strong> <a href="https://www.cgsp-admi-liege.be/contact/" target="_blank">cgsp-admi-liege.be</a></div>
+          <div class="contact-line"><strong>🕐</strong> Lu-Je : 8h-12h30 / 13h30</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-name">Service juridique FGTB Liège-Huy-Waremme</div>
+          <div class="contact-line"><strong>📞</strong> <a href="tel:042219799">04 221 97 99</a></div>
+          <div class="contact-line"><strong>🕐</strong> Lu 8h30-12h ; Ma/Me/Je 13h30-16h</div>
+          <div class="contact-line"><strong>🌐</strong> <a href="https://fgtb-liege.be/nos_services/service-juridique/" target="_blank">fgtb-liege.be</a></div>
+          <div class="contact-line"><em>Permanence sans RDV : Ma/Me/Je 8h30-11h30</em></div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label">Document envoyé</div>
+        <button class="doc-button" onclick="showDoc('doc-fgtb')">📄 Voir le mail FGTB</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD DR SOMJA -->
+  <div class="card urgent" data-id="somja">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>👩‍⚕️ Dr Somja — Algologue</span>
+        <span class="badge go">À faire</span>
+      </div>
+      <div class="card-meta">Attestation médicale actualisée — CHR Huy</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-somja-1"><label for="c-somja-1">Appel secrétariat pour parler à Dr Somja</label></li>
+          <li><input type="checkbox" id="c-somja-2"><label for="c-somja-2">Exposer le contexte SFP et solliciter son aide</label></li>
+          <li><input type="checkbox" id="c-somja-3"><label for="c-somja-3">Mentionner thérapie anticorps monoclonaux Dr Timmermans</label></li>
+          <li><input type="checkbox" id="c-somja-4"><label for="c-somja-4">Lui envoyer le courrier formel si elle le souhaite</label></li>
+          <li><input type="checkbox" id="c-somja-5"><label for="c-somja-5">Réception de l'attestation actualisée</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Contact</div>
+        <div class="contact-block">
+          <div class="contact-name">Dr G. Somja — Clinique multidisciplinaire de la Douleur</div>
+          <div class="contact-line"><strong>📍</strong> CHR Huy — Rue des Trois Ponts, 2 — 4500 Huy</div>
+          <div class="contact-line"><strong>📞</strong> <a href="tel:0852771157">085 27 71 57</a> (secrétariat médical)</div>
+          <div class="contact-line"><strong>📞</strong> <a href="tel:0852774426">085 27 74 26</a> (algologie - infirmières)</div>
+          <div class="contact-line"><strong>✉️</strong> <a href="mailto:algologie@chrh.be">algologie@chrh.be</a></div>
+          <div class="contact-line"><strong>🌐</strong> <a href="https://www.chrh.be" target="_blank">www.chrh.be</a></div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label">Document préparé</div>
+        <button class="doc-button" onclick="showDoc('doc-somja')">📄 Voir le courrier Dr Somja</button>
+        <div class="note">💡 Privilégie l'appel d'abord — elle est à l'écoute. Le courrier sert si elle te demande de formaliser par écrit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD ME DE BOYER -->
+  <div class="card urgent" data-id="deboyer">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>⚖️ Me De Boyer — Avocat</span>
+        <span class="badge go">À faire</span>
+      </div>
+      <div class="card-meta">Dossier judiciaire — Rapport Boxho complet</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-db-1"><label for="c-db-1">Appel ou mail pour prendre RDV</label></li>
+          <li><input type="checkbox" id="c-db-2"><label for="c-db-2">Récupérer rapport définitif Boxho complet (~33 p.)</label></li>
+          <li><input type="checkbox" id="c-db-3"><label for="c-db-3">Confirmer : rapport notifié au SPF Intérieur ? Quand ?</label></li>
+          <li><input type="checkbox" id="c-db-4"><label for="c-db-4">Avis stratégique sur usage rapport vs SFP</label></li>
+          <li><input type="checkbox" id="c-db-5"><label for="c-db-5">L'informer du conflit SFP en cours</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Contact</div>
+        <div class="contact-block">
+          <div class="contact-name">Maître Bernard De Boyer</div>
+          <div class="contact-line"><strong>📍</strong> Avenue Joseph Lebeau, 1 — 4500 Huy</div>
+          <div class="contact-line"><strong>✉️</strong> <a href="mailto:info@proelium.be">info@proelium.be</a></div>
+          <div class="contact-line"><strong>📁</strong> Réf. dossier : 1138221/AW/BDB</div>
+          <div class="contact-line"><strong>📁</strong> Réf. judiciaire : 18RH3078</div>
+        </div>
+      </div>
+      <div class="note">💡 Il connaît déjà ton dossier judiciaire. Vu l'importance du rapport Boxho pour le dossier SFP, il faut absolument l'impliquer dans la stratégie.</div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- PHASE 2 -->
+
+  <div class="phase">
+    <div class="phase-title"><span class="phase-number">2</span>Semaine 2-3 — Courriers formels</div>
+    <div class="cards">
+
+```
+  <!-- CARD SFP -->
+  <div class="card medium" data-id="sfp">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>🏛️ SFP — Décision motivée</span>
+        <span class="badge wait">Préparé</span>
+      </div>
+      <div class="card-meta">Demande de décision formelle motivée</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-sfp-1"><label for="c-sfp-1">Attendre retour CGSP (ou max J+7)</label></li>
+          <li><input type="checkbox" id="c-sfp-2"><label for="c-sfp-2">Compléter la date du courrier</label></li>
+          <li><input type="checkbox" id="c-sfp-3"><label for="c-sfp-3">Préparer les annexes (5 documents)</label></li>
+          <li><input type="checkbox" id="c-sfp-4"><label for="c-sfp-4">Envoi recommandé avec AR + mail</label></li>
+          <li><input type="checkbox" id="c-sfp-5"><label for="c-sfp-5">Conserver récépissé recommandé + AR</label></li>
+          <li><input type="checkbox" id="c-sfp-6"><label for="c-sfp-6">Suivi de la réponse SFP (délai 60 j.)</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Pièces à joindre</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-sfp-p1"><label for="c-sfp-p1">Courrier SFP du 05/03/2026</label></li>
+          <li><input type="checkbox" id="c-sfp-p2"><label for="c-sfp-p2">Décompte SFP du 28/04/2026</label></li>
+          <li><input type="checkbox" id="c-sfp-p3"><label for="c-sfp-p3">E-mail SFP du 05/05/2026</label></li>
+          <li><input type="checkbox" id="c-sfp-p4"><label for="c-sfp-p4">Rapport définitif Pr Boxho du 13/04/2026</label></li>
+          <li><input type="checkbox" id="c-sfp-p5"><label for="c-sfp-p5">Rapport MEDEX du 30/05/2024</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Contacts</div>
+        <div class="contact-block">
+          <div class="contact-name">SFP — Service Rentes Accident du Travail</div>
+          <div class="contact-line"><strong>📍</strong> Tour du Midi, Esplanade de l'Europe 1 — 1060 Bruxelles</div>
+          <div class="contact-line"><strong>📞</strong> <a href="tel:025293571">02 529 35 71</a></div>
+          <div class="contact-line"><strong>✉️</strong> <a href="mailto:ga@sfpd.fgov.be">ga@sfpd.fgov.be</a></div>
+          <div class="contact-line"><strong>🌐</strong> <a href="https://www.sfpd.fgov.be" target="_blank">www.sfpd.fgov.be</a></div>
+          <div class="contact-line"><strong>📁</strong> Dossier : 74.10.10-017.46 / 46-625193-09</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-name">SFP — Centre de contact (info générale)</div>
+          <div class="contact-line"><strong>📞</strong> 1765 (gratuit Belgique) ou +32 78 15 1765</div>
+          <div class="contact-line"><strong>✉️</strong> <a href="mailto:Contact.CenterFR@sfpd.fgov.be">Contact.CenterFR@sfpd.fgov.be</a></div>
+          <div class="contact-line"><strong>🌐</strong> <a href="https://www.mypension.be" target="_blank">www.mypension.be</a> (dossier perso)</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label">Courrier à envoyer</div>
+        <button class="doc-button" onclick="showDoc('doc-sfp')">📄 Voir le courrier SFP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD CAPSP -->
+  <div class="card medium" data-id="capsp">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>🏛️ CAPSP — Conversion définitive</span>
+        <span class="badge wait">Préparé</span>
+      </div>
+      <div class="card-meta">Demande de conversion pension temporaire → définitive</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-capsp-1"><label for="c-capsp-1">Valider courrier avec CGSP</label></li>
+          <li><input type="checkbox" id="c-capsp-2"><label for="c-capsp-2">Compléter date + matricule</label></li>
+          <li><input type="checkbox" id="c-capsp-3"><label for="c-capsp-3">Préparer les annexes médicales</label></li>
+          <li><input type="checkbox" id="c-capsp-4"><label for="c-capsp-4">Envoi recommandé avec AR</label></li>
+          <li><input type="checkbox" id="c-capsp-5"><label for="c-capsp-5">Suivi de la réponse</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Pièces à joindre</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-capsp-p1"><label for="c-capsp-p1">Rapport MEDEX du 30/05/2024</label></li>
+          <li><input type="checkbox" id="c-capsp-p2"><label for="c-capsp-p2">Rapport définitif Pr Boxho (EXP2157642)</label></li>
+          <li><input type="checkbox" id="c-capsp-p3"><label for="c-capsp-p3">Courrier Dr Somja du 31/03/2026</label></li>
+          <li><input type="checkbox" id="c-capsp-p4"><label for="c-capsp-p4">Décision DGPH (66% / 9 points)</label></li>
+          <li><input type="checkbox" id="c-capsp-p5"><label for="c-capsp-p5">Décision CAPSP de mise à la pension</label></li>
+          <li><input type="checkbox" id="c-capsp-p6"><label for="c-capsp-p6">Courrier Dr Timmermans (si reçu)</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Contact</div>
+        <div class="contact-block">
+          <div class="contact-name">CAPSP — Commission d'aptitude du personnel des services de police</div>
+          <div class="contact-line"><strong>📍</strong> Rue Royale 202A — 1000 Bruxelles</div>
+          <div class="contact-line warning">⚠️ Téléphone / mail direct à obtenir via CGSP ou ancien service du personnel</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-name">Service médical Police fédérale (référence)</div>
+          <div class="contact-line"><strong>📍</strong> Avenue de la Couronne 145F — 1050 Ixelles</div>
+          <div class="contact-line"><strong>🌐</strong> <a href="http://www.smdpol.be" target="_blank">www.smdpol.be</a></div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label">Courrier à envoyer</div>
+        <button class="doc-button" onclick="showDoc('doc-capsp')">📄 Voir le courrier CAPSP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD TIMMERMANS -->
+  <div class="card medium" data-id="timmermans">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>👨‍⚕️ Dr Timmermans — Neurologue</span>
+        <span class="badge wait">À solliciter</span>
+      </div>
+      <div class="card-meta">Courrier de consultation — thérapie anti-CGRP</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-tim-1"><label for="c-tim-1">Appel secrétariat neurologie CHR Citadelle</label></li>
+          <li><input type="checkbox" id="c-tim-2"><label for="c-tim-2">Demande courrier de consultation standard</label></li>
+          <li><input type="checkbox" id="c-tim-3"><label for="c-tim-3">Réception du document</label></li>
+          <li><input type="checkbox" id="c-tim-4"><label for="c-tim-4">Versement au dossier SFP/CAPSP/protection juridique</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Contact</div>
+        <div class="contact-block">
+          <div class="contact-name">Dr Gregory Timmermans — CHR Citadelle</div>
+          <div class="contact-line"><strong>📍</strong> Boulevard du 12e de Ligne, 1 — 4000 Liège</div>
+          <div class="contact-line warning">⚠️ Téléphone direct à demander via standard CHR Citadelle ou Dr Hansen</div>
+          <div class="contact-line"><strong>🌐</strong> <a href="https://www.chrcitadelle.be" target="_blank">www.chrcitadelle.be</a></div>
+        </div>
+      </div>
+      <div class="note">💡 Demande un courrier de consultation classique : tableau clinique, traitements antérieurs, indication anti-CGRP, escalade thérapeutique. Pas besoin de question juridique — l'imputabilité est déjà acquise dans l'expertise Boxho.</div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- PHASE 3 -->
+
+  <div class="phase">
+    <div class="phase-title"><span class="phase-number">3</span>Semaine 4+ — Recours et seconde ligne</div>
+    <div class="cards">
+
+```
+  <!-- CARD MEDIATEUR -->
+  <div class="card low" data-id="mediateur">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>⚖️ Médiateur fédéral Pensions</span>
+        <span class="badge wait">Si nécessaire</span>
+      </div>
+      <div class="card-meta">Recours gratuit indépendant</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-med-1"><label for="c-med-1">Attendre 30-45 jours la réponse SFP</label></li>
+          <li><input type="checkbox" id="c-med-2"><label for="c-med-2">Si réponse insuffisante : saisine formelle</label></li>
+          <li><input type="checkbox" id="c-med-3"><label for="c-med-3">Remplir formulaire en ligne</label></li>
+          <li><input type="checkbox" id="c-med-4"><label for="c-med-4">Joindre tous les courriers SFP + pièces médicales</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Contact</div>
+        <div class="contact-block">
+          <div class="contact-name">Service de Médiation Pensions</div>
+          <div class="contact-line"><strong>📍</strong> Boulevard Simon Bolivar 30 boîte 5 — 1000 Bruxelles</div>
+          <div class="contact-line"><strong>📞</strong> <a href="tel:022741990">02 274 19 90</a> (jours ouvrables 9h-12h)</div>
+          <div class="contact-line"><strong>🌐</strong> <a href="https://www.mediateurpensions.be" target="_blank">www.mediateurpensions.be</a></div>
+          <div class="contact-line"><em>Formulaire de plainte disponible sur le site, rubrique "Plaintes"</em></div>
+        </div>
+      </div>
+      <div class="note">💡 Le Médiateur exige que tu aies d'abord tenté la résolution avec le SFP. Tes courriers en cours suffisent à cette condition.</div>
+    </div>
+  </div>
+
+  <!-- CARD PROTECTION JURIDIQUE -->
+  <div class="card medium" data-id="protjur">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>🛡️ Protection juridique</span>
+        <span class="badge go">À activer</span>
+      </div>
+      <div class="card-meta">Médecin expert pour aggravation IPP</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-pj-1"><label for="c-pj-1">Contacter ton assurance protection juridique</label></li>
+          <li><input type="checkbox" id="c-pj-2"><label for="c-pj-2">Activer la mission "médecin expert aggravation IPP"</label></li>
+          <li><input type="checkbox" id="c-pj-3"><label for="c-pj-3">Transmettre dossier médical complet</label></li>
+          <li><input type="checkbox" id="c-pj-4"><label for="c-pj-4">Coordonner avec Me De Boyer</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Contact</div>
+        <div class="contact-block">
+          <div class="contact-name">Assurance protection juridique</div>
+          <div class="contact-line warning">⚠️ Coordonnées à compléter — vérifie tes contrats</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD TRIBUNAL -->
+  <div class="card low" data-id="tribunal">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>⚖️ Tribunal du travail</span>
+        <span class="badge wait">Dernier recours</span>
+      </div>
+      <div class="card-meta">Si tout échoue</div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="section">
+        <div class="section-label">Points clés</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="c-trib-1"><label for="c-trib-1"><strong>Délai : 3 mois</strong> à compter d'une décision SFP formelle</label></li>
+          <li><input type="checkbox" id="c-trib-2"><label for="c-trib-2">Mandater avocat via CGSP ou protection juridique</label></li>
+          <li><input type="checkbox" id="c-trib-3"><label for="c-trib-3">Préparer dossier complet (médical + administratif)</label></li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-label">Juridiction compétente</div>
+        <div class="contact-block">
+          <div class="contact-name">Tribunal du travail de Liège</div>
+          <div class="contact-line warning">⚠️ Division Huy ou Liège — à confirmer selon ton domicile (Nandrin)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- PHASE 4 -->
+
+  <div class="phase">
+    <div class="phase-title"><span class="phase-number">4</span>Inventaire des pièces du dossier</div>
+    <div class="cards">
+
+```
+  <!-- CARD PIECES OK -->
+  <div class="card done" data-id="pieces-ok">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>📁 Pièces en ma possession</span>
+        <span class="badge done">Acquis</span>
+      </div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <ul class="checklist">
+        <li><input type="checkbox" id="p-ok-1" checked><label for="p-ok-1">Rapport MEDEX 30/05/2024 (60% IPP + "absence totale de réinsertion")</label></li>
+        <li><input type="checkbox" id="p-ok-2" checked><label for="p-ok-2">Courrier SFP 05/03/2026 (estimation 2.633,58 €/mois)</label></li>
+        <li><input type="checkbox" id="p-ok-3" checked><label for="p-ok-3">Décompte SFP 28/04/2026 (rente AT à 0 €)</label></li>
+        <li><input type="checkbox" id="p-ok-4" checked><label for="p-ok-4">E-mail SFP 05/05/2026 (refus motivé)</label></li>
+        <li><input type="checkbox" id="p-ok-5" checked><label for="p-ok-5">Courrier Dr Wanet 08/05/2024 (compte-rendu EJ3)</label></li>
+        <li><input type="checkbox" id="p-ok-6" checked><label for="p-ok-6">Rapport préliminaire Pr Boxho 14/08/2024</label></li>
+        <li><input type="checkbox" id="p-ok-7" checked><label for="p-ok-7">Annexe rapport définitif Pr Boxho 13/04/2026 (3 pages)</label></li>
+        <li><input type="checkbox" id="p-ok-8" checked><label for="p-ok-8">Courrier Dr Somja 31/03/2026 (aggravation)</label></li>
+        <li><input type="checkbox" id="p-ok-9" checked><label for="p-ok-9">Décision DGPH (66% / 9 points) + carte stationnement PMR</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CARD PIECES TODO -->
+  <div class="card urgent" data-id="pieces-todo">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-title">
+        <span>📁 Pièces à obtenir</span>
+        <span class="badge go">En cours</span>
+      </div>
+      <span class="card-indicator">▼</span>
+    </div>
+    <div class="card-body">
+      <ul class="checklist">
+        <li><input type="checkbox" id="p-todo-1"><label for="p-todo-1"><strong>Rapport définitif Pr Boxho complet</strong> (33 p.) — chez toi ou via Me De Boyer</label></li>
+        <li><input type="checkbox" id="p-todo-2"><label for="p-todo-2">Attestation actualisée Dr Somja sur capacité de travail générale</label></li>
+        <li><input type="checkbox" id="p-todo-3"><label for="p-todo-3">Courrier de consultation Dr Timmermans</label></li>
+        <li><input type="checkbox" id="p-todo-4"><label for="p-todo-4">Décision CAPSP officielle de mise à la pension d'office</label></li>
+        <li><input type="checkbox" id="p-todo-5"><label for="p-todo-5">Éventuel nouveau bilan neuropsychologique (pour aggravation)</label></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Document</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="doc-button gold" onclick="copyDoc()">📋 Copier dans le presse-papier</button>
+      <button class="doc-button" onclick="closeModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Tableau de bord généré le 11/05/2026 — Sauvegarde automatique active<br>
+  À conserver dans le projet "Déplafonnement rente AT"
+</div>
+
+<!-- DOCUMENTS -->
+
+<div id="docs" style="display:none;">
+
+<div id="doc-fgtb" data-title="Mail à la CGSP-Police / FGTB">Objet : URGENT - Demande d'assistance juridique - Pensionné FGTB - Litige SFP rente AT
+
+Bonjour,
+
+Je suis affilié à la CGSP-Police (FGTB) et je sollicite l’assistance urgente du service juridique pour un litige grave avec le Service fédéral des Pensions.
+
+Situation en bref :
+
+- Pensionné d’office (pension temporaire pour inaptitude physique) depuis le 01/05/2026 suite à un accident du travail consolidé au 01/04/2024, IPP 60%.
+- Le SFP m’a confirmé par courrier du 05/03/2026 que ma rente AT passerait à 60% (2.633,58 €/mois indexés) au 01/05/2026, article 7 non applicable.
+- Le décompte du 28/04/2026 a ramené ma rente AT à 0 €.
+- Le SFP a répondu par e-mail du 05/05/2026 en invoquant la réforme du 01/01/2025 sur la pension temporaire pour maintenir le plafonnement à 25% (article 6 loi 3/7/1967).
+- Perte mensuelle : ~1.500 €/mois, soit ~30.000 € sur la durée maximale de la pension temporaire.
+
+Urgence :
+J’ai basé toute ma planification post-pension sur l’engagement écrit du SFP du 05/03/2026. Le revirement de mai me met dans une situation financière intenable. Le délai de recours contre la position SFP (3 mois) court déjà.
+
+Dossier solide et structuré :
+
+- Deux courriers contradictoires du SFP à deux mois d’intervalle.
+- Rapport définitif d’expertise judiciaire du Pr Boxho (Institut médico-légal ULiège) du 13/04/2026 confirmant 60% d’incapacité économique, absence d’état antérieur, réserves pour aggravation.
+- Rapport MEDEX 30/05/2024 mentionnant “absence totale de réinsertion professionnelle”.
+- Courrier Dr Somja 31/03/2026 constatant aggravation post-consolidation.
+- Reconnaissance DGPH 66% / 9 points + carte stationnement PMR.
+
+Mes questions :
+
+1. La FGTB a-t-elle eu d’autres dossiers similaires depuis la réforme du 01/01/2025 ? Avec quelle issue ?
+1. Quelle est votre position juridique sur l’articulation entre la loi du 18 mai 2024 et les articles 5, 6, 7 de la loi du 3 juillet 1967 ?
+1. Pouvez-vous m’accompagner pour : (i) un courrier de décision motivée au SFP, (ii) une saisine du Médiateur fédéral des Pensions, (iii) une demande de conversion en pension définitive auprès de la CAPSP, et (iv) le cas échéant un recours devant le Tribunal du travail ?
+
+Pouvez-vous me proposer un rendez-vous cette semaine ? Je peux me déplacer ou organiser un échange téléphonique. Je tiens à disposition l’ensemble du dossier sous format électronique.
+
+Merci pour votre attention urgente.
+
+Bien cordialement,
+
+Jérôme RICHY
+Premier Inspecteur de police pensionné
+N° affiliation FGTB : [à compléter]
+Matricule : [à compléter]
+Téléphone : [à compléter]
+Adresse : Rue des Loups 17, 4550 Nandrin</div>
+
+<div id="doc-somja" data-title="Courrier au Dr Somja">Jérôme RICHY
+Rue des Loups 17
+4550 Nandrin
+Né le 10/10/1974
+
+Docteur G. SOMJA
+Clinique multidisciplinaire de la douleur
+Centre Hospitalier Régional de Huy
+Rue des Trois Ponts, 2
+4500 HUY
+
+Nandrin, le [date]
+
+Objet : Demande d’attestation médicale complémentaire dans le cadre de mon dossier d’accident du travail
+Référence : MARENA-34544-32309615K-1-17912259
+
+Cher Docteur,
+
+Je me permets de vous solliciter à la suite de votre courrier du 31 mars 2026 adressé au Dr Eric Meunier, dans lequel vous décriviez la dégradation de mon état clinique et concluiez que celui-ci était « incompatible avec ma profession de policier ».
+
+Depuis le 1er mai 2026, je suis pensionné d’office à titre temporaire pour inaptitude physique, suite à une décision de la commission d’aptitude (CAPSP), elle-même fondée sur les séquelles consolidées de mon accident du travail de juillet 2018 (IPP de 60 % reconnue par MEDEX).
+
+Je suis confronté à une difficulté administrative pour laquelle votre appréciation médicale me serait précieuse.
+
+Le Service fédéral des Pensions justifie le maintien d’un plafonnement de ma rente d’accident du travail (à 25 % au lieu des 60 % d’IPP reconnus) au motif que ma pension est administrativement « temporaire » depuis la réforme du 1er janvier 2025, et que cette qualification temporaire impliquerait qu’une « reprise du travail reste possible ». Cette position entraîne pour moi une perte financière mensuelle substantielle.
+
+Les documents médicaux dont je dispose actuellement (notamment vos courriers, le rapport MEDEX du 30 mai 2024 mentionnant une « absence totale de réinsertion professionnelle », et le rapport définitif d’expertise judiciaire du Pr Boxho du 13 avril 2026) attestent de l’incompatibilité de mon état avec ma profession de policier, mais une appréciation médicale actualisée et explicite sur ma capacité à exercer toute autre activité professionnelle, qu’elle soit reconvertie ou adaptée, me serait précieuse.
+
+Dans le cadre de mes démarches en cours auprès du SFP, du Médiateur fédéral des Pensions, de la CAPSP et, le cas échéant, des juridictions du travail, je sollicite donc votre appréciation médicale honnête sur les deux points suivants, telle qu’elle vous apparaît objectivement au regard de votre suivi et des examens cliniques réalisés :
+
+- Compte tenu du tableau clinique actuel (douleurs chroniques résistantes, céphalées invalidantes en aggravation, troubles cognitifs et de concentration, fatigue chronique, traitement de palier 3 maintenu avec perfusions mensuelles de kétamine et magnésium, polymédication associée), ma situation permet-elle d’envisager raisonnablement une reprise d’activité professionnelle, même partielle, même adaptée ou reconvertie ?
+- L’évolution observée depuis la consolidation du 1er avril 2024 va-t-elle dans le sens d’une récupération permettant d’espérer une telle reprise à court ou moyen terme, ou au contraire dans le sens d’une stabilisation, voire d’une aggravation ?
+
+Je sollicite donc, si votre appréciation clinique le permet, un courrier complémentaire adressé « à qui de droit » (utilisable devant le SFP, la CAPSP et les juridictions), précisant votre évaluation médicale objective sur ces deux points.
+
+Je tiens à souligner que je sollicite votre appréciation honnête et non une attestation orientée : si votre lecture clinique nuance ou contredit ce que je suggère ci-dessus, votre courrier n’en aura que plus de valeur probante, et je le respecterai.
+
+Je reste à votre disposition pour une consultation si vous estimez nécessaire un examen actualisé avant de vous prononcer. Si vous avez besoin de pièces complémentaires (rapport MEDEX, rapport d’expertise judiciaire du Pr Boxho, courriers SFP), je vous les transmettrai sans délai.
+
+Je vous remercie sincèrement pour le suivi attentif que vous m’apportez depuis plusieurs années et pour l’attention que vous voudrez bien porter à cette demande.
+
+Je vous prie d’agréer, cher Docteur, l’expression de ma reconnaissance et de mes sentiments respectueux.
+
+Jérôme RICHY</div>
+
+<div id="doc-sfp" data-title="Courrier SFP — Décision motivée">Jérôme RICHY
+Rue des Loups 17
+4550 Nandrin
+
+Service fédéral des Pensions
+Service Rentes Accident du Travail
+À l’attention du Responsable du Service
+Tour du Midi, Esplanade de l’Europe 1
+1060 Bruxelles
+
+Par courrier recommandé
+Et par e-mail à : ga@sfpd.fgov.be
+
+En copie : Médiateur fédéral des Pensions
+
+Nandrin, le [date]
+
+Objet : Demande de décision motivée et formelle – contradiction entre vos courriers du 05/03/2026 et du 05/05/2026
+Dossier : 74.10.10-017.46 / 46-625193-09
+Vos références : courrier du 05/03/2026, décompte du 28/04/2026, e-mail de réponse du 05/05/2026
+
+Madame, Monsieur,
+
+Je fais suite à votre e-mail du 05/05/2026 répondant à ma demande de clarification écrite.
+
+Je constate avec inquiétude que la position que vous m’exprimez aujourd’hui contredit frontalement votre courrier officiel du 05/03/2026, et entraîne pour moi une perte mensuelle nette de l’ordre de 1.500 à 1.600 euros par rapport au montant que votre service m’avait formellement annoncé.
+
+Malgré la bonne volonté manifeste des collaborateurs que j’ai eus au téléphone, ceux-ci n’ont pas été en mesure de répondre à mes questions de manière satisfaisante.
+
+Vu l’importance de cet enjeu et l’incertitude juridique qui apparaît au sein de votre propre service, je sollicite par la présente une décision motivée et formelle, susceptible le cas échéant de recours.
+
+1. Rappel des positions successives du SFP
+
+Dans votre courrier du 05/03/2026, signé « Le Service Pensions », votre service m’a expressément confirmé :
+
+- que le cumul de ma pension pour inaptitude physique et de mes rentes d’accident du travail (25.577,56 €) est inférieur à mon dernier traitement annuel brut non indexé (25.861,00 €) ;
+- que « l’article 7 n’est pas applicable, car le cumul ne dépasse pas votre dernier traitement annuel. Les rentes ne sont donc pas limitées » ;
+- que ma rente 4662519309 (60 % IPP) sera payée mensuellement, indexée au coefficient 2,1647, pour un montant de 2.633,58 € par mois.
+
+Dans votre e-mail du 05/05/2026, votre service prend une position diamétralement opposée :
+
+- la pension temporaire pour inaptitude physique ne serait pas assimilée à une cessation définitive des fonctions au sens de la loi du 3 juillet 1967 ;
+- l’article 6 de cette loi resterait dès lors applicable, plafonnant ma rente à 25 % de la rémunération de base ;
+- l’article 7 ne s’appliquerait qu’en cas de cessation définitive des fonctions.
+
+1. Mes observations
+
+Je relève que :
+
+a) Les deux positions émanent du même service, à deux mois d’intervalle, sur le même dossier, sans qu’aucun élément factuel de ma situation n’ait changé entre les deux ;
+
+b) Le courrier du 05/03/2026 a été établi alors que la réforme issue de la loi du 18 mai 2024 était déjà en vigueur depuis plus de deux mois, et alors même que ma pension à venir était nécessairement une pension temporaire au sens de cette réforme ;
+
+c) La loi du 18 mai 2024 n’a, à ma connaissance, pas modifié les articles 5, 6 et 7 de la loi du 3 juillet 1967 ;
+
+d) L’article 6, § 1er de la loi du 3 juillet 1967 vise la situation où la victime « conserve l’exercice de fonctions », ce qui n’est plus mon cas depuis le 1er mai 2026 : je ne perçois plus de traitement d’activité, je n’exerce plus aucune fonction effective et je ne me présente plus au travail ;
+
+e) L’inaptitude médicale qui motive ma pension n’est pas une appréciation pronostique réversible, mais un constat médical définitif, comme établi ci-après par expertise judiciaire définitive.
+
+1. Éléments médico-légaux définitifs
+
+Votre service ne peut ignorer que mon état de santé a fait l’objet d’une expertise judiciaire complète dans le cadre de la procédure 18RH3078 pendante devant le Tribunal de Première Instance de Liège, ordonnée par jugement du 05/03/2020.
+
+L’expert judiciaire désigné, le Professeur Philippe BOXHO de l’Institut médico-légal de l’Université de Liège, a déposé son rapport définitif le 13/04/2026 (n° EXP2157642), établissant notamment :
+
+- une incapacité économique permanente partielle de 60 %, identique au taux d’IPP reconnu par MEDEX (rapport du 30/05/2024) ;
+- l’absence d’état antérieur, de prédisposition pathologique et d’aide d’une tierce personne ;
+- des réserves pour toute complication en rapport avec les faits accidentels ;
+- la confirmation, sur le plan neuropsychologique, que mes difficultés « interdisent non seulement d’envisager la reprise de l’activité professionnelle antérieure, mais […] impactent également toute activité exigeante sur le plan attentionnel et/ou nécessitant des compétences communicationnelles ».
+
+La prudence administrative interdit à votre service de fonder le maintien d’un plafonnement à 25 % de ma rente sur l’hypothèse d’une « reprise du travail possible », alors qu’une expertise judiciaire définitive contradictoirement débattue établit le contraire.
+
+1. Mes demandes formelles
+
+Vu ce qui précède, je vous demande de me transmettre, par courrier officiel signé :
+
+a) Une décision formelle et motivée fixant le montant exact de ma rente d’accident du travail 4662519309 à compter du 01/05/2026, en précisant la base légale exacte (loi, article, paragraphe et alinéa) sur laquelle vous fondez le maintien d’un plafonnement à 25 % d’IPP malgré ma mise à la pension d’office ;
+
+b) La motivation juridique précise expliquant pour quelle raison l’article 6, § 1er de la loi du 3 juillet 1967 reste applicable à ma situation, alors que je n’exerce plus mes fonctions et que l’expertise judiciaire définitive du Pr Boxho établit l’impossibilité médicale de toute reprise professionnelle ;
+
+c) La motivation juridique précise expliquant pour quelle raison votre service a pu, le 05/03/2026, m’annoncer formellement le contraire (paiement de la rente à 60 % d’IPP, soit 2.633,58 € mensuels indexés, et non-application de l’article 7) ;
+
+d) Le sort réservé aux montants déjà versés ou non versés depuis le 01/05/2026, ainsi que les modalités et délais d’une éventuelle régularisation rétroactive selon la décision finale ;
+
+e) Les voies et délais de recours contre cette décision.
+
+1. Conclusion
+
+Compte tenu de l’enjeu financier (perte de l’ordre de 30.000 € sur la durée maximale de la pension temporaire), de l’engagement écrit antérieur du SFP en sens contraire, de l’absence de modification expresse des articles 5 à 7 de la loi du 3 juillet 1967 par la loi du 18 mai 2024, et de l’expertise judiciaire définitive contradictoire établissant le caractère irréversible de mon inaptitude, je vous remercie de bien vouloir me transmettre votre décision motivée dans un délai raisonnable, et au plus tard dans les soixante jours de la présente.
+
+Je me réserve, en l’absence de réponse satisfaisante dans ce délai, le droit de saisir le Médiateur fédéral des Pensions ainsi que toute juridiction compétente.
+
+Je vous prie de croire, Madame, Monsieur, à l’assurance de ma considération distinguée.
+
+Jérôme RICHY
+Premier Inspecteur de police pensionné
+
+Annexes :
+
+- Copie du courrier SFP du 05/03/2026
+- Copie du décompte SFP du 28/04/2026
+- Copie de l’e-mail SFP du 05/05/2026
+- Conclusions définitives du rapport d’expertise judiciaire du Pr Boxho du 13/04/2026 (EXP2157642)
+- Rapport MEDEX du 30/05/2024</div>
+
+<div id="doc-capsp" data-title="Courrier CAPSP — Conversion en pension définitive">Jérôme RICHY
+Rue des Loups 17
+4550 Nandrin
+
+Commission d’aptitude du personnel des services de police (CAPSP)
+Rue Royale 202A
+1000 Bruxelles
+
+Par courrier recommandé
+En copie : Service du personnel Police fédérale, Médecin du travail référent
+
+Nandrin, le [date]
+
+Objet : Demande de conversion de ma pension temporaire pour inaptitude physique en pension définitive
+Référence dossier CAPSP : POL/24/236420
+Matricule : [à compléter]
+
+Madame, Monsieur,
+
+Par décision de la CAPSP, j’ai été mis à la pension d’office à titre temporaire pour inaptitude physique avec effet au 1er mai 2026.
+
+Je sollicite par la présente la conversion de cette pension temporaire en pension définitive pour inaptitude physique, sur la base d’éléments médicaux définitifs nouvellement acquis qui établissent le caractère irréversible de mon inaptitude.
+
+1. Rappel du contexte
+
+Ma mise à la pension temporaire fait suite aux séquelles permanentes d’un accident du travail survenu le 23/07/2018, consolidé le 01/04/2024 par MEDEX, avec reconnaissance d’une incapacité permanente partielle de 60 %.
+
+Le rapport MEDEX du 30/05/2024 mentionnait explicitement, en conclusion clinique : « Absence totale de réinsertion professionnelle ».
+
+1. Éléments médicaux définitifs nouvellement acquis
+
+a) Rapport définitif d’expertise judiciaire du Professeur Philippe BOXHO
+
+Dans le cadre de la procédure judiciaire 18RH3078 pendante devant le Tribunal de Première Instance de Liège (16e chambre), une expertise judiciaire a été ordonnée par jugement du 05/03/2020 du Juge Kuty. L’expert judiciaire désigné, le Professeur Philippe BOXHO de l’Institut médico-légal de l’Université de Liège, a déposé son rapport définitif le 13/04/2026 (n° EXP2157642).
+
+Les conclusions définitives de l’expertise judiciaire établissent :
+
+- une incapacité économique permanente partielle de 60 %,
+- une incapacité personnelle permanente partielle de 40 %,
+- une incapacité ménagère permanente partielle de 40 %,
+- consolidation au 01/07/2021,
+- l’absence d’état antérieur, de prédisposition pathologique et d’aide d’une tierce personne,
+- des réserves pour toute complication en rapport avec les faits en cause.
+
+Le rapport rappelle, sur le plan neuropsychologique (sapiteur Pr Meulemans, ULiège), que mes difficultés cognitives « interdisent non seulement d’envisager la reprise de l’activité professionnelle antérieure du patient, mais […] impactent également toute activité exigeante sur le plan attentionnel et/ou nécessitant des compétences communicationnelles ».
+
+b) Aggravation post-consolidation documentée par la Clinique de la Douleur du CHR Huy
+
+Le Docteur G. SOMJA, algologue, dans son courrier du 31/03/2026, constate une dégradation de mon état clinique malgré un traitement bien conduit, avec des céphalées en aggravation, des paresthésies et des troubles de la concentration « incompatibles avec son travail ». Le Docteur SOMJA conclut que mon état clinique « devient malheureusement incompatible avec sa profession de policier ».
+
+À cela s’ajoute l’instauration récente d’une thérapie aux anticorps monoclonaux anti-CGRP par le Dr Timmermans (CHR Citadelle, neurologue spécialisé en céphalées), traitement de dernière ligne témoignant de l’escalade thérapeutique rendue nécessaire par l’aggravation des céphalées post-traumatiques reconnues par l’expertise judiciaire.
+
+c) Reconnaissance de handicap par la DGPH
+
+Je suis reconnu porteur d’un handicap de 66 % avec un score de 9 points sur 18 par la Direction générale Personnes handicapées du SPF Sécurité sociale, avec délivrance d’une carte de stationnement pour personnes à mobilité réduite.
+
+1. Caractère irréversible de mon inaptitude
+
+L’ensemble de ces éléments converge pour établir que :
+
+- mon inaptitude aux fonctions de policier est définitive ;
+- aucun élément médical ne permet d’envisager une évolution favorable ;
+- au contraire, mon état continue à se dégrader post-consolidation, comme documenté par le Docteur Somja et par l’instauration d’un traitement de dernière ligne ;
+- l’expert judiciaire a explicitement maintenu des réserves pour toute aggravation à venir ;
+- la « temporalité » de ma pension ne repose sur aucun fondement médical, mais uniquement sur le régime administratif imposé par défaut depuis la réforme du 01/01/2025.
+
+1. Demandes
+
+Je vous demande par conséquent :
+
+a) De convoquer un nouvel examen auprès de la CAPSP afin de constater le caractère définitif de mon inaptitude ;
+b) De convertir ma pension temporaire en pension définitive pour inaptitude physique avec effet au 1er mai 2026 ;
+c) De m’indiquer les pièces complémentaires qui seraient éventuellement requises pour instruire cette demande.
+
+Je tiens à votre disposition l’intégralité des pièces médicales mentionnées ci-dessus et reste à votre disposition pour tout examen médical complémentaire que vous jugeriez utile.
+
+Je vous remercie de l’attention que vous voudrez bien porter à ma demande et vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.
+
+Jérôme RICHY
+Premier Inspecteur de police pensionné
+
+Annexes :
+
+- Rapport MEDEX du 30/05/2024
+- Rapport définitif d’expertise judiciaire du Pr Boxho du 13/04/2026 (EXP2157642)
+- Courrier Dr Somja du 31/03/2026
+- Décision DGPH de reconnaissance de handicap
+- Décision CAPSP de mise à la pension d’office</div>
+
+</div>
+
+<script>
+  function getStorage() {
+    try { return localStorage; } catch(e) { return null; }
+  }
+
+  function saveCheckbox(id, checked) {
+    const s = getStorage();
+    if (s) { try { s.setItem('jr-' + id, checked ? '1' : '0'); } catch(e) {} }
+  }
+
+  function loadCheckbox(id) {
+    const s = getStorage();
+    if (s) { try { const v = s.getItem('jr-' + id); return v === null ? null : v === '1'; } catch(e) { return null; } }
+    return null;
+  }
+
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    const saved = loadCheckbox(cb.id);
+    if (saved !== null) cb.checked = saved;
+    cb.addEventListener('change', () => {
+      saveCheckbox(cb.id, cb.checked);
+      updateProgress();
+    });
+  });
+
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+    if (loadCheckbox(cb.id) === null) saveCheckbox(cb.id, true);
+  });
+
+  function toggleCard(header) {
+    header.parentElement.classList.toggle('open');
+  }
+
+  function updateProgress() {
+    const total = document.querySelectorAll('input[type="checkbox"]').length;
+    const done  = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    document.getElementById('progress').style.width = (total > 0 ? (done/total)*100 : 0) + '%';
+  }
+  updateProgress();
+
+  let currentDocText = '';
+  function showDoc(id) {
+    const doc = document.getElementById(id);
+    if (!doc) return;
+    currentDocText = doc.textContent.trim();
+    document.getElementById('modal-title').textContent = doc.getAttribute('data-title') || 'Document';
+    document.getElementById('modal-body').textContent = currentDocText;
+    document.getElementById('modal').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  function copyDoc() {
+    if (!currentDocText) return;
+    navigator.clipboard.writeText(currentDocText)
+      .then(() => alert('Document copié dans le presse-papier !'))
+      .catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = currentDocText;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        alert('Document copié !');
+      });
+  }
+
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target.id === 'modal') closeModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+</body>
+</html>
