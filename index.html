@@ -8,401 +8,94 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Source Serif 4', Georgia, serif; background: #f5f1e8; color: #2b2b2b; min-height: 100vh; padding: 16px; line-height: 1.5; }
 
-body {
-font-family: ‘Source Serif 4’, Georgia, serif;
-background: #f5f1e8;
-color: #2b2b2b;
-min-height: 100vh;
-padding: 16px;
-line-height: 1.5;
-}
+/* HEADER original : texte navy sur blanc, double bordure */
+.header { text-align: center; padding: 28px 16px 20px; border-bottom: 3px double #1a2942; margin-bottom: 30px; background: white; }
+h1 { font-family: ‘Playfair Display’, Georgia, serif; font-size: 1.7em; color: #1a2942; margin-bottom: 8px; font-weight: 700; }
+.subtitle { color: #2a3f5f; font-style: italic; font-size: 0.95em; }
 
-/* HEADER */
-.header {
-text-align: center;
-padding: 28px 16px 20px;
-border-bottom: 3px double #1a2942;
-margin-bottom: 30px;
-background: #1a2942;
-border-radius: 8px;
-color: #f5f1e8;
-}
+.legend { background: #ebe4d3; border-left: 4px solid #c9a961; padding: 12px 16px; margin: 0 auto 24px; font-size: 0.88em; border-radius: 0 4px 4px 0; }
 
-h1 {
-font-family: ‘Playfair Display’, Georgia, serif;
-font-size: 1.6em;
-color: #c9a961;
-margin-bottom: 6px;
-letter-spacing: 0.5px;
-}
+.progress-label { text-align: center; font-size: 0.85em; color: #1a2942; font-style: italic; margin-bottom: 8px; }
+.progress-bar { background: #ebe4d3; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 32px; }
+.progress-fill { background: linear-gradient(to right, #5a7a4f, #c9a961); height: 100%; width: 0%; transition: width 0.5s; border-radius: 4px; }
 
-.subtitle {
-color: #ebe4d3;
-font-style: italic;
-font-size: 0.95em;
-}
-
-/* LEGEND */
-.legend {
-background: #ebe4d3;
-border-left: 4px solid #c9a961;
-padding: 12px 16px;
-margin: 0 auto 24px;
-font-size: 0.88em;
-border-radius: 0 4px 4px 0;
-}
-
-/* PROGRESS */
-.progress-label {
-text-align: center;
-font-size: 0.85em;
-color: #1a2942;
-font-style: italic;
-margin-bottom: 8px;
-}
-
-.progress-bar {
-background: #ebe4d3;
-height: 8px;
-border-radius: 4px;
-overflow: hidden;
-margin-bottom: 32px;
-}
-
-.progress-fill {
-background: linear-gradient(to right, #5a7a4f, #c9a961);
-height: 100%;
-width: 0%;
-transition: width 0.5s;
-border-radius: 4px;
-}
-
-/* PHASE ARROW CONNECTOR */
-.phase-arrow {
-text-align: center;
-margin: 8px 0 24px;
-font-size: 2.2em;
-line-height: 1;
-}
-
-/* PHASE */
-.phase {
-margin-bottom: 16px;
-}
-
-.phase-title {
-font-family: ‘Playfair Display’, Georgia, serif;
-font-size: 1.1em;
-color: #f5f1e8;
-text-transform: uppercase;
-letter-spacing: 2px;
-padding: 12px 16px;
-margin-bottom: 16px;
-display: flex;
-align-items: center;
-gap: 12px;
-border-radius: 6px;
-}
-
+.phase-arrow { text-align: center; margin: 8px 0 24px; font-size: 2.2em; line-height: 1; }
+.phase { margin-bottom: 16px; }
+.phase-title { font-family: ‘Playfair Display’, Georgia, serif; font-size: 1.1em; color: #f5f1e8; text-transform: uppercase; letter-spacing: 2px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; border-radius: 6px; }
 .phase-1 .phase-title { background: #a8553d; }
 .phase-2 .phase-title { background: #1a2942; }
 .phase-3 .phase-title { background: #5a7a4f; }
 .phase-4 .phase-title { background: #6b5a2a; }
+.phase-number { background: rgba(255,255,255,0.25); color: white; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1em; flex-shrink: 0; }
 
-.phase-number {
-background: rgba(255,255,255,0.25);
-color: white;
-width: 34px;
-height: 34px;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
-font-size: 1em;
-flex-shrink: 0;
-}
+.cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 700px)  { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, 1fr); } }
 
-/* CARDS GRID */
-.cards {
-display: grid;
-grid-template-columns: 1fr;
-gap: 14px;
-}
-
-@media (min-width: 700px) {
-.cards { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1000px) {
-.cards { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* CARD */
-.card {
-background: white;
-border-radius: 8px;
-box-shadow: 0 2px 10px rgba(26,41,66,0.12);
-overflow: hidden;
-transition: transform 0.2s, box-shadow 0.2s;
-}
-
+.card { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(26,41,66,0.12); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
 .card:hover { transform: translateY(-2px); box-shadow: 0 5px 18px rgba(26,41,66,0.18); }
-
 .card.urgent { border-left: 6px solid #a8553d; }
 .card.medium { border-left: 6px solid #c9a961; }
 .card.low    { border-left: 6px solid #5a7a4f; }
 .card.done   { border-left: 6px solid #1a2942; opacity: 0.75; }
 
-.card-header {
-padding: 14px 16px;
-background: linear-gradient(135deg, #f5f1e8 0%, white 100%);
-border-bottom: 1px solid #ebe4d3;
-cursor: pointer;
-user-select: none;
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-gap: 8px;
-}
-
+.card-header { padding: 14px 16px; background: linear-gradient(135deg, #f5f1e8 0%, white 100%); border-bottom: 1px solid #ebe4d3; cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .card-header-left { flex: 1; }
+.card-title { font-weight: 600; color: #1a2942; font-size: 1em; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.card-meta { font-size: 0.78em; color: #2a3f5f; font-style: italic; }
 
-.card-title {
-font-weight: 600;
-color: #1a2942;
-font-size: 1em;
-margin-bottom: 4px;
-display: flex;
-align-items: center;
-gap: 8px;
-flex-wrap: wrap;
-}
-
-.card-meta {
-font-size: 0.78em;
-color: #2a3f5f;
-font-style: italic;
-}
-
-.badge {
-padding: 2px 10px;
-border-radius: 20px;
-font-size: 0.68em;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 0.8px;
-white-space: nowrap;
-flex-shrink: 0;
-}
-
+.badge { padding: 2px 10px; border-radius: 20px; font-size: 0.68em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; flex-shrink: 0; }
 .badge.done { background: #5a7a4f; color: white; }
 .badge.wait { background: #c9a961; color: #1a2942; }
 .badge.go   { background: #a8553d; color: white; }
 
-.card-indicator {
-color: #c9a961;
-font-size: 1.1em;
-transition: transform 0.3s;
-flex-shrink: 0;
-margin-top: 2px;
-}
-
+.card-indicator { color: #c9a961; font-size: 1.1em; transition: transform 0.3s; flex-shrink: 0; margin-top: 2px; }
 .card.open .card-indicator { transform: rotate(180deg); }
+.card-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; padding: 0 16px; }
+.card.open .card-body { max-height: 5000px; padding: 16px; }
 
-.card-body {
-max-height: 0;
-overflow: hidden;
-transition: max-height 0.4s ease, padding 0.3s;
-padding: 0 16px;
-}
-
-.card.open .card-body {
-max-height: 5000px;
-padding: 16px;
-}
-
-/* SECTION */
 .section { margin-bottom: 18px; }
+.section-label { font-size: 0.78em; color: #1a2942; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px dotted #c9a961; }
 
-.section-label {
-font-size: 0.78em;
-color: #1a2942;
-text-transform: uppercase;
-letter-spacing: 1.5px;
-font-weight: 700;
-margin-bottom: 8px;
-padding-bottom: 4px;
-border-bottom: 1px dotted #c9a961;
-}
-
-/* CHECKLIST */
 .checklist { list-style: none; }
+.checklist li { padding: 5px 0; display: flex; align-items: flex-start; gap: 10px; }
+.checklist input[type=“checkbox”] { margin-top: 3px; accent-color: #5a7a4f; cursor: pointer; flex-shrink: 0; width: 16px; height: 16px; }
+.checklist label { cursor: pointer; flex: 1; font-size: 0.93em; transition: color 0.2s; }
+.checklist input[type=“checkbox”]:checked + label { text-decoration: line-through; color: #aaa; }
 
-.checklist li {
-padding: 5px 0;
-display: flex;
-align-items: flex-start;
-gap: 10px;
-}
-
-.checklist input[type=“checkbox”] {
-margin-top: 3px;
-accent-color: #5a7a4f;
-cursor: pointer;
-flex-shrink: 0;
-width: 16px;
-height: 16px;
-}
-
-.checklist label {
-cursor: pointer;
-flex: 1;
-font-size: 0.93em;
-transition: color 0.2s;
-}
-
-.checklist input[type=“checkbox”]:checked + label {
-text-decoration: line-through;
-color: #aaa;
-}
-
-/* CONTACT BLOCK */
-.contact-block {
-background: #f5f1e8;
-padding: 11px 14px;
-border-radius: 4px;
-border-left: 3px solid #c9a961;
-font-size: 0.88em;
-margin-bottom: 8px;
-}
-
-.contact-name {
-font-weight: 600;
-color: #1a2942;
-margin-bottom: 5px;
-}
-
+.contact-block { background: #f5f1e8; padding: 11px 14px; border-radius: 4px; border-left: 3px solid #c9a961; font-size: 0.88em; margin-bottom: 8px; }
+.contact-name { font-weight: 600; color: #1a2942; margin-bottom: 5px; }
 .contact-line { margin: 3px 0; color: #2b2b2b; }
 .contact-line strong { color: #2a3f5f; display: inline-block; min-width: 26px; }
 .contact-line a { color: #a8553d; text-decoration: none; }
 .contact-line a:hover { text-decoration: underline; }
-
 .warning { color: #a8553d; font-style: italic; font-size: 0.85em; }
 
-/* BUTTONS */
-.doc-button {
-display: inline-block;
-background: #1a2942;
-color: #f5f1e8;
-padding: 8px 14px;
-border-radius: 4px;
-font-size: 0.88em;
-border: none;
-cursor: pointer;
-margin: 4px 4px 4px 0;
-font-family: inherit;
-letter-spacing: 0.3px;
-transition: background 0.2s;
-}
-
+.doc-button { display: inline-block; background: #1a2942; color: #f5f1e8; padding: 8px 14px; border-radius: 4px; font-size: 0.88em; border: none; cursor: pointer; margin: 4px 4px 4px 0; font-family: inherit; letter-spacing: 0.3px; transition: background 0.2s; }
 .doc-button:hover { background: #2a3f5f; }
 .doc-button.gold { background: #c9a961; color: #1a2942; }
 .doc-button.gold:hover { background: #e0c890; }
 
-/* NOTE */
-.note {
-font-size: 0.85em;
-color: #2a3f5f;
-background: #f5f1e8;
-padding: 10px 13px;
-border-left: 3px solid #2a3f5f;
-margin-top: 10px;
-font-style: italic;
-border-radius: 0 4px 4px 0;
-}
+.note { font-size: 0.85em; color: #2a3f5f; background: #f5f1e8; padding: 10px 13px; border-left: 3px solid #2a3f5f; margin-top: 10px; font-style: italic; border-radius: 0 4px 4px 0; }
 
-/* MODAL */
-.modal-overlay {
-position: fixed;
-top: 0; left: 0; right: 0; bottom: 0;
-background: rgba(26,41,66,0.88);
-display: none;
-align-items: flex-start;
-justify-content: center;
-z-index: 1000;
-padding: 16px;
-overflow-y: auto;
-}
-
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26,41,66,0.88); display: none; align-items: flex-start; justify-content: center; z-index: 1000; padding: 16px; overflow-y: auto; }
 .modal-overlay.active { display: flex; }
-
-.modal {
-background: #f5f1e8;
-border-radius: 8px;
-max-width: 800px;
-width: 100%;
-margin: 30px auto;
-box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-overflow: hidden;
-}
-
-.modal-header {
-background: #1a2942;
-color: #f5f1e8;
-padding: 16px 20px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
+.modal { background: #f5f1e8; border-radius: 8px; max-width: 800px; width: 100%; margin: 30px auto; box-shadow: 0 12px 40px rgba(0,0,0,0.35); overflow: hidden; }
+.modal-header { background: #1a2942; color: #f5f1e8; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
 .modal-title { font-size: 1em; font-weight: 600; }
+.modal-close { background: none; border: none; color: #f5f1e8; font-size: 1.8em; cursor: pointer; line-height: 1; padding: 0; }
+.modal-body { padding: 24px; max-height: 65vh; overflow-y: auto; font-family: ‘Courier New’, monospace; font-size: 0.88em; line-height: 1.7; white-space: pre-wrap; background: white; }
+.modal-footer { background: #ebe4d3; padding: 12px 20px; display: flex; gap: 8px; justify-content: flex-end; }
 
-.modal-close {
-background: none;
-border: none;
-color: #f5f1e8;
-font-size: 1.8em;
-cursor: pointer;
-line-height: 1;
-padding: 0;
-}
+.footer { text-align: center; padding: 32px 16px 16px; color: #2a3f5f; font-style: italic; font-size: 0.82em; border-top: 1px solid #ebe4d3; margin-top: 40px; }
 
-.modal-body {
-padding: 24px;
-max-height: 65vh;
-overflow-y: auto;
-font-family: ‘Courier New’, monospace;
-font-size: 0.88em;
-line-height: 1.7;
-white-space: pre-wrap;
-background: white;
-}
-
-.modal-footer {
-background: #ebe4d3;
-padding: 12px 20px;
-text-align: right;
-display: flex;
-gap: 8px;
-justify-content: flex-end;
-}
-
-/* FOOTER */
-.footer {
-text-align: center;
-padding: 32px 16px 16px;
-color: #2a3f5f;
-font-style: italic;
-font-size: 0.82em;
-border-top: 1px solid #ebe4d3;
-margin-top: 40px;
-}
+@keyframes flashGreen { 0% { background: #d4edda; } 100% { background: transparent; } }
 
 @media print {
 .card-body { max-height: none !important; padding: 16px !important; }
-.card-indicator, .doc-button { display: none; }
-.phase-arrow { display: none; }
+.card-indicator, .doc-button, .phase-arrow { display: none; }
 }
 </style>
 
@@ -415,84 +108,68 @@ margin-top: 40px;
 </div>
 
 <div class="legend">
-  <strong>Mode d'emploi :</strong> chaque fiche se déplie en appuyant dessus. Les cases à cocher sont sauvegardées automatiquement. Les courriers sont consultables et copiables.
+  <strong>Mode d'emploi :</strong> chaque fiche se déplie en appuyant dessus. Les cases à cocher sont sauvegardées automatiquement. Les courriers sont consultables et copiables. Quand tu coches un document dans "Pièces à obtenir", il migre automatiquement dans "Pièces en ma possession".
 </div>
 
 <div class="progress-label">Avancement global</div>
 <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
 
-<!-- ═══════════════════════════════════════════
-     PHASE 1
-════════════════════════════════════════════ -->
+<!-- PHASE 1 -->
 
 <div class="phase phase-1">
-  <div class="phase-title">
-    <span class="phase-number">1</span>
-    Cette semaine — Actions urgentes
-  </div>
+  <div class="phase-title"><span class="phase-number">1</span>Cette semaine — Actions urgentes</div>
   <div class="cards">
+    <div class="card done">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <div class="card-title">🛡️ CGSP-Police / FGTB <span class="badge done">Fait ✓</span></div>
+          <div class="card-meta">Syndicat — Service juridique</div>
+        </div>
+        <span class="card-indicator">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="section"><div class="section-label">Actions</div>
+          <ul class="checklist">
+            <li><input type="checkbox" id="c-fgtb-1" checked><label for="c-fgtb-1">Mail envoyé à info.admiliege@cgsp.be</label></li>
+            <li><input type="checkbox" id="c-fgtb-2" checked><label for="c-fgtb-2">Copie à Eddy (représentant national)</label></li>
+            <li><input type="checkbox" id="c-fgtb-3" checked><label for="c-fgtb-3">Copie à Patrick (délégué direct)</label></li>
+            <li><input type="checkbox" id="c-fgtb-4"><label for="c-fgtb-4">Appel téléphonique à Patrick pour appuyer</label></li>
+            <li><input type="checkbox" id="c-fgtb-5"><label for="c-fgtb-5">Préparer dossier numérique complet pour RDV</label></li>
+            <li><input type="checkbox" id="c-fgtb-6"><label for="c-fgtb-6">RDV avec service juridique CGSP</label></li>
+          </ul>
+        </div>
+        <div class="section"><div class="section-label">Contacts</div>
+          <div class="contact-block">
+            <div class="contact-name">CGSP Admi Liège (secteur Police)</div>
+            <div class="contact-line"><strong>📍</strong> Place Saint-Paul, 7a — 4000 Liège</div>
+            <div class="contact-line"><strong>📞</strong> <a href="tel:042219777">04 221 97 77</a></div>
+            <div class="contact-line"><strong>✉️</strong> <a href="mailto:info.admiliege@cgsp.be">info.admiliege@cgsp.be</a></div>
+            <div class="contact-line"><strong>🕐</strong> Lu-Je : 8h-12h30 / 13h30</div>
+          </div>
+          <div class="contact-block">
+            <div class="contact-name">Service juridique FGTB Liège-Huy-Waremme</div>
+            <div class="contact-line"><strong>📞</strong> <a href="tel:042219799">04 221 97 99</a></div>
+            <div class="contact-line"><strong>🕐</strong> Lu 8h30-12h ; Ma/Me/Je 13h30-16h</div>
+            <div class="contact-line"><em>Permanence sans RDV : Ma/Me/Je 8h30-11h30</em></div>
+          </div>
+        </div>
+        <div class="section"><div class="section-label">Document envoyé</div>
+          <button class="doc-button" onclick="showDoc('doc-fgtb')">📄 Voir le mail FGTB</button>
+        </div>
+      </div>
+    </div>
 
 ```
-<div class="card done" data-id="fgtb">
+<div class="card urgent">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="card-header-left">
-      <div class="card-title">
-        🛡️ CGSP-Police / FGTB
-        <span class="badge done">Fait ✓</span>
-      </div>
-      <div class="card-meta">Syndicat — Service juridique</div>
-    </div>
-    <span class="card-indicator">▼</span>
-  </div>
-  <div class="card-body">
-    <div class="section">
-      <div class="section-label">Actions</div>
-      <ul class="checklist">
-        <li><input type="checkbox" id="c-fgtb-1" checked><label for="c-fgtb-1">Mail envoyé à info.admiliege@cgsp.be</label></li>
-        <li><input type="checkbox" id="c-fgtb-2" checked><label for="c-fgtb-2">Copie à Eddy (représentant national)</label></li>
-        <li><input type="checkbox" id="c-fgtb-3" checked><label for="c-fgtb-3">Copie à Patrick (délégué direct)</label></li>
-        <li><input type="checkbox" id="c-fgtb-4"><label for="c-fgtb-4">Appel téléphonique à Patrick pour appuyer</label></li>
-        <li><input type="checkbox" id="c-fgtb-5"><label for="c-fgtb-5">Préparer dossier numérique complet pour RDV</label></li>
-        <li><input type="checkbox" id="c-fgtb-6"><label for="c-fgtb-6">RDV avec service juridique CGSP</label></li>
-      </ul>
-    </div>
-    <div class="section">
-      <div class="section-label">Contacts</div>
-      <div class="contact-block">
-        <div class="contact-name">CGSP Admi Liège (secteur Police)</div>
-        <div class="contact-line"><strong>📍</strong> Place Saint-Paul, 7a — 4000 Liège</div>
-        <div class="contact-line"><strong>📞</strong> <a href="tel:042219777">04 221 97 77</a></div>
-        <div class="contact-line"><strong>✉️</strong> <a href="mailto:info.admiliege@cgsp.be">info.admiliege@cgsp.be</a></div>
-        <div class="contact-line"><strong>🕐</strong> Lu-Je : 8h-12h30 / 13h30</div>
-      </div>
-      <div class="contact-block">
-        <div class="contact-name">Service juridique FGTB Liège-Huy-Waremme</div>
-        <div class="contact-line"><strong>📞</strong> <a href="tel:042219799">04 221 97 99</a></div>
-        <div class="contact-line"><strong>🕐</strong> Lu 8h30-12h ; Ma/Me/Je 13h30-16h</div>
-        <div class="contact-line"><em>Permanence sans RDV : Ma/Me/Je 8h30-11h30</em></div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="section-label">Document envoyé</div>
-      <button class="doc-button" onclick="showDoc('doc-fgtb')">📄 Voir le mail FGTB</button>
-    </div>
-  </div>
-</div>
-
-<div class="card urgent" data-id="somja">
-  <div class="card-header" onclick="toggleCard(this)">
-    <div class="card-header-left">
-      <div class="card-title">
-        👩‍⚕️ Dr Somja — Algologue
-        <span class="badge go">À faire</span>
-      </div>
+      <div class="card-title">👩‍⚕️ Dr Somja — Algologue <span class="badge go">À faire</span></div>
       <div class="card-meta">Attestation médicale actualisée — CHR Huy</div>
     </div>
     <span class="card-indicator">▼</span>
   </div>
   <div class="card-body">
-    <div class="section">
-      <div class="section-label">Actions</div>
+    <div class="section"><div class="section-label">Actions</div>
       <ul class="checklist">
         <li><input type="checkbox" id="c-somja-1"><label for="c-somja-1">Appel secrétariat pour parler à Dr Somja</label></li>
         <li><input type="checkbox" id="c-somja-2"><label for="c-somja-2">Exposer le contexte SFP et solliciter son aide</label></li>
@@ -501,8 +178,7 @@ margin-top: 40px;
         <li><input type="checkbox" id="c-somja-5"><label for="c-somja-5">Réception de l'attestation actualisée</label></li>
       </ul>
     </div>
-    <div class="section">
-      <div class="section-label">Contact</div>
+    <div class="section"><div class="section-label">Contact</div>
       <div class="contact-block">
         <div class="contact-name">Dr G. Somja — Clinique de la Douleur</div>
         <div class="contact-line"><strong>📍</strong> CHR Huy — Rue des Trois Ponts, 2 — 4500 Huy</div>
@@ -511,28 +187,23 @@ margin-top: 40px;
         <div class="contact-line"><strong>✉️</strong> <a href="mailto:algologie@chrh.be">algologie@chrh.be</a></div>
       </div>
     </div>
-    <div class="section">
-      <div class="section-label">Document préparé</div>
+    <div class="section"><div class="section-label">Document préparé</div>
       <button class="doc-button" onclick="showDoc('doc-somja')">📄 Voir le courrier Dr Somja</button>
       <div class="note">💡 Privilégie l'appel d'abord — elle est à l'écoute.</div>
     </div>
   </div>
 </div>
 
-<div class="card urgent" data-id="deboyer">
+<div class="card urgent">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="card-header-left">
-      <div class="card-title">
-        ⚖️ Me De Boyer — Avocat
-        <span class="badge go">À faire</span>
-      </div>
+      <div class="card-title">⚖️ Me De Boyer — Avocat <span class="badge go">À faire</span></div>
       <div class="card-meta">Dossier judiciaire — Rapport Boxho complet</div>
     </div>
     <span class="card-indicator">▼</span>
   </div>
   <div class="card-body">
-    <div class="section">
-      <div class="section-label">Actions</div>
+    <div class="section"><div class="section-label">Actions</div>
       <ul class="checklist">
         <li><input type="checkbox" id="c-db-1"><label for="c-db-1">Appel ou mail pour prendre RDV</label></li>
         <li><input type="checkbox" id="c-db-2"><label for="c-db-2">Récupérer rapport définitif Boxho complet (~33 p.)</label></li>
@@ -541,8 +212,7 @@ margin-top: 40px;
         <li><input type="checkbox" id="c-db-5"><label for="c-db-5">L'informer du conflit SFP en cours</label></li>
       </ul>
     </div>
-    <div class="section">
-      <div class="section-label">Contact</div>
+    <div class="section"><div class="section-label">Contact</div>
       <div class="contact-block">
         <div class="contact-name">Maître Bernard De Boyer</div>
         <div class="contact-line"><strong>📍</strong> Avenue Joseph Lebeau, 1 — 4500 Huy</div>
@@ -558,92 +228,70 @@ margin-top: 40px;
   </div>
 </div>
 
-<!-- FLÈCHE 1→2 -->
+<div class="phase-arrow"><span style="color:#c9a961;">⬇</span></div>
 
-<div class="phase-arrow">
-  <span style="color:#c9a961; filter: drop-shadow(0 2px 4px rgba(201,169,97,0.4));">⬇</span>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     PHASE 2
-════════════════════════════════════════════ -->
+<!-- PHASE 2 -->
 
 <div class="phase phase-2">
-  <div class="phase-title">
-    <span class="phase-number">2</span>
-    Semaine 2-3 — Courriers formels
-  </div>
+  <div class="phase-title"><span class="phase-number">2</span>Semaine 2-3 — Courriers formels</div>
   <div class="cards">
+    <div class="card medium">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <div class="card-title">🏛️ SFP — Décision motivée <span class="badge wait">Préparé</span></div>
+          <div class="card-meta">Demande de décision formelle motivée</div>
+        </div>
+        <span class="card-indicator">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="section"><div class="section-label">Actions</div>
+          <ul class="checklist">
+            <li><input type="checkbox" id="c-sfp-1"><label for="c-sfp-1">Attendre retour CGSP (ou max J+7)</label></li>
+            <li><input type="checkbox" id="c-sfp-2"><label for="c-sfp-2">Compléter la date du courrier</label></li>
+            <li><input type="checkbox" id="c-sfp-3"><label for="c-sfp-3">Préparer les annexes (5 documents)</label></li>
+            <li><input type="checkbox" id="c-sfp-4"><label for="c-sfp-4">Envoi recommandé avec AR + mail</label></li>
+            <li><input type="checkbox" id="c-sfp-5"><label for="c-sfp-5">Conserver récépissé recommandé + AR</label></li>
+            <li><input type="checkbox" id="c-sfp-6"><label for="c-sfp-6">Suivi de la réponse SFP (délai 60 j.)</label></li>
+          </ul>
+        </div>
+        <div class="section"><div class="section-label">Pièces à joindre</div>
+          <ul class="checklist">
+            <li><input type="checkbox" id="c-sfp-p1"><label for="c-sfp-p1">Courrier SFP du 05/03/2026</label></li>
+            <li><input type="checkbox" id="c-sfp-p2"><label for="c-sfp-p2">Décompte SFP du 28/04/2026</label></li>
+            <li><input type="checkbox" id="c-sfp-p3"><label for="c-sfp-p3">E-mail SFP du 05/05/2026</label></li>
+            <li><input type="checkbox" id="c-sfp-p4"><label for="c-sfp-p4">Rapport définitif Pr Boxho du 13/04/2026</label></li>
+            <li><input type="checkbox" id="c-sfp-p5"><label for="c-sfp-p5">Rapport MEDEX du 30/05/2024</label></li>
+          </ul>
+        </div>
+        <div class="section"><div class="section-label">Contacts</div>
+          <div class="contact-block">
+            <div class="contact-name">SFP — Service Rentes Accident du Travail</div>
+            <div class="contact-line"><strong>📍</strong> Tour du Midi, Esplanade de l'Europe 1 — 1060 Bruxelles</div>
+            <div class="contact-line"><strong>📞</strong> <a href="tel:025293571">02 529 35 71</a></div>
+            <div class="contact-line"><strong>✉️</strong> <a href="mailto:ga@sfpd.fgov.be">ga@sfpd.fgov.be</a></div>
+            <div class="contact-line"><strong>📁</strong> 74.10.10-017.46 / 46-625193-09</div>
+          </div>
+          <div class="contact-block">
+            <div class="contact-name">SFP — Centre de contact</div>
+            <div class="contact-line"><strong>📞</strong> 1765 (gratuit Belgique)</div>
+            <div class="contact-line"><strong>✉️</strong> <a href="mailto:Contact.CenterFR@sfpd.fgov.be">Contact.CenterFR@sfpd.fgov.be</a></div>
+          </div>
+        </div>
+        <div class="section"><button class="doc-button" onclick="showDoc('doc-sfp')">📄 Voir le courrier SFP</button></div>
+      </div>
+    </div>
 
 ```
-<div class="card medium" data-id="sfp">
+<div class="card medium">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="card-header-left">
-      <div class="card-title">
-        🏛️ SFP — Décision motivée
-        <span class="badge wait">Préparé</span>
-      </div>
-      <div class="card-meta">Demande de décision formelle motivée</div>
-    </div>
-    <span class="card-indicator">▼</span>
-  </div>
-  <div class="card-body">
-    <div class="section">
-      <div class="section-label">Actions</div>
-      <ul class="checklist">
-        <li><input type="checkbox" id="c-sfp-1"><label for="c-sfp-1">Attendre retour CGSP (ou max J+7)</label></li>
-        <li><input type="checkbox" id="c-sfp-2"><label for="c-sfp-2">Compléter la date du courrier</label></li>
-        <li><input type="checkbox" id="c-sfp-3"><label for="c-sfp-3">Préparer les annexes (5 documents)</label></li>
-        <li><input type="checkbox" id="c-sfp-4"><label for="c-sfp-4">Envoi recommandé avec AR + mail</label></li>
-        <li><input type="checkbox" id="c-sfp-5"><label for="c-sfp-5">Conserver récépissé recommandé + AR</label></li>
-        <li><input type="checkbox" id="c-sfp-6"><label for="c-sfp-6">Suivi de la réponse SFP (délai 60 j.)</label></li>
-      </ul>
-    </div>
-    <div class="section">
-      <div class="section-label">Pièces à joindre</div>
-      <ul class="checklist">
-        <li><input type="checkbox" id="c-sfp-p1"><label for="c-sfp-p1">Courrier SFP du 05/03/2026</label></li>
-        <li><input type="checkbox" id="c-sfp-p2"><label for="c-sfp-p2">Décompte SFP du 28/04/2026</label></li>
-        <li><input type="checkbox" id="c-sfp-p3"><label for="c-sfp-p3">E-mail SFP du 05/05/2026</label></li>
-        <li><input type="checkbox" id="c-sfp-p4"><label for="c-sfp-p4">Rapport définitif Pr Boxho du 13/04/2026</label></li>
-        <li><input type="checkbox" id="c-sfp-p5"><label for="c-sfp-p5">Rapport MEDEX du 30/05/2024</label></li>
-      </ul>
-    </div>
-    <div class="section">
-      <div class="section-label">Contacts</div>
-      <div class="contact-block">
-        <div class="contact-name">SFP — Service Rentes Accident du Travail</div>
-        <div class="contact-line"><strong>📍</strong> Tour du Midi, Esplanade de l'Europe 1 — 1060 Bruxelles</div>
-        <div class="contact-line"><strong>📞</strong> <a href="tel:025293571">02 529 35 71</a></div>
-        <div class="contact-line"><strong>✉️</strong> <a href="mailto:ga@sfpd.fgov.be">ga@sfpd.fgov.be</a></div>
-        <div class="contact-line"><strong>📁</strong> 74.10.10-017.46 / 46-625193-09</div>
-      </div>
-      <div class="contact-block">
-        <div class="contact-name">SFP — Centre de contact</div>
-        <div class="contact-line"><strong>📞</strong> 1765 (gratuit Belgique)</div>
-        <div class="contact-line"><strong>✉️</strong> <a href="mailto:Contact.CenterFR@sfpd.fgov.be">Contact.CenterFR@sfpd.fgov.be</a></div>
-      </div>
-    </div>
-    <div class="section">
-      <button class="doc-button" onclick="showDoc('doc-sfp')">📄 Voir le courrier SFP</button>
-    </div>
-  </div>
-</div>
-
-<div class="card medium" data-id="capsp">
-  <div class="card-header" onclick="toggleCard(this)">
-    <div class="card-header-left">
-      <div class="card-title">
-        🏛️ CAPSP — Conversion définitive
-        <span class="badge wait">Préparé</span>
-      </div>
+      <div class="card-title">🏛️ CAPSP — Conversion définitive <span class="badge wait">Préparé</span></div>
       <div class="card-meta">Pension temporaire → définitive</div>
     </div>
     <span class="card-indicator">▼</span>
   </div>
   <div class="card-body">
-    <div class="section">
-      <div class="section-label">Actions</div>
+    <div class="section"><div class="section-label">Actions</div>
       <ul class="checklist">
         <li><input type="checkbox" id="c-capsp-1"><label for="c-capsp-1">Valider courrier avec CGSP</label></li>
         <li><input type="checkbox" id="c-capsp-2"><label for="c-capsp-2">Compléter date + matricule</label></li>
@@ -652,8 +300,7 @@ margin-top: 40px;
         <li><input type="checkbox" id="c-capsp-5"><label for="c-capsp-5">Suivi de la réponse</label></li>
       </ul>
     </div>
-    <div class="section">
-      <div class="section-label">Pièces à joindre</div>
+    <div class="section"><div class="section-label">Pièces à joindre</div>
       <ul class="checklist">
         <li><input type="checkbox" id="c-capsp-p1"><label for="c-capsp-p1">Rapport MEDEX du 30/05/2024</label></li>
         <li><input type="checkbox" id="c-capsp-p2"><label for="c-capsp-p2">Rapport définitif Pr Boxho (EXP2157642)</label></li>
@@ -663,34 +310,27 @@ margin-top: 40px;
         <li><input type="checkbox" id="c-capsp-p6"><label for="c-capsp-p6">Courrier Dr Timmermans (si reçu)</label></li>
       </ul>
     </div>
-    <div class="section">
-      <div class="section-label">Contact</div>
+    <div class="section"><div class="section-label">Contact</div>
       <div class="contact-block">
         <div class="contact-name">CAPSP — Commission d'aptitude</div>
         <div class="contact-line"><strong>📍</strong> Rue Royale 202A — 1000 Bruxelles</div>
         <div class="contact-line warning">⚠️ Contact direct à obtenir via CGSP</div>
       </div>
     </div>
-    <div class="section">
-      <button class="doc-button" onclick="showDoc('doc-capsp')">📄 Voir le courrier CAPSP</button>
-    </div>
+    <div class="section"><button class="doc-button" onclick="showDoc('doc-capsp')">📄 Voir le courrier CAPSP</button></div>
   </div>
 </div>
 
-<div class="card medium" data-id="timmermans">
+<div class="card medium">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="card-header-left">
-      <div class="card-title">
-        👨‍⚕️ Dr Timmermans — Neurologue
-        <span class="badge wait">À solliciter</span>
-      </div>
+      <div class="card-title">👨‍⚕️ Dr Timmermans — Neurologue <span class="badge wait">À solliciter</span></div>
       <div class="card-meta">Courrier de consultation — thérapie anti-CGRP</div>
     </div>
     <span class="card-indicator">▼</span>
   </div>
   <div class="card-body">
-    <div class="section">
-      <div class="section-label">Actions</div>
+    <div class="section"><div class="section-label">Actions</div>
       <ul class="checklist">
         <li><input type="checkbox" id="c-tim-1"><label for="c-tim-1">Appel secrétariat neurologie CHR Citadelle</label></li>
         <li><input type="checkbox" id="c-tim-2"><label for="c-tim-2">Demande courrier de consultation standard</label></li>
@@ -698,8 +338,7 @@ margin-top: 40px;
         <li><input type="checkbox" id="c-tim-4"><label for="c-tim-4">Versement au dossier SFP/CAPSP</label></li>
       </ul>
     </div>
-    <div class="section">
-      <div class="section-label">Contact</div>
+    <div class="section"><div class="section-label">Contact</div>
       <div class="contact-block">
         <div class="contact-name">Dr Gregory Timmermans — CHR Citadelle</div>
         <div class="contact-line"><strong>📍</strong> Bd du 12e de Ligne, 1 — 4000 Liège</div>
@@ -714,72 +353,53 @@ margin-top: 40px;
   </div>
 </div>
 
-<!-- FLÈCHE 2→3 -->
+<div class="phase-arrow"><span style="color:#5a7a4f;">⬇</span></div>
 
-<div class="phase-arrow">
-  <span style="color:#5a7a4f; filter: drop-shadow(0 2px 4px rgba(90,122,79,0.4));">⬇</span>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     PHASE 3
-════════════════════════════════════════════ -->
+<!-- PHASE 3 -->
 
 <div class="phase phase-3">
-  <div class="phase-title">
-    <span class="phase-number">3</span>
-    Semaine 4+ — Recours et seconde ligne
-  </div>
+  <div class="phase-title"><span class="phase-number">3</span>Semaine 4+ — Recours et seconde ligne</div>
   <div class="cards">
+    <div class="card low">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <div class="card-title">⚖️ Médiateur fédéral Pensions <span class="badge wait">Si nécessaire</span></div>
+          <div class="card-meta">Recours gratuit indépendant</div>
+        </div>
+        <span class="card-indicator">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="section"><div class="section-label">Actions</div>
+          <ul class="checklist">
+            <li><input type="checkbox" id="c-med-1"><label for="c-med-1">Attendre 30-45 jours la réponse SFP</label></li>
+            <li><input type="checkbox" id="c-med-2"><label for="c-med-2">Si réponse insuffisante : saisine formelle</label></li>
+            <li><input type="checkbox" id="c-med-3"><label for="c-med-3">Remplir formulaire en ligne</label></li>
+            <li><input type="checkbox" id="c-med-4"><label for="c-med-4">Joindre tous les courriers SFP + pièces médicales</label></li>
+          </ul>
+        </div>
+        <div class="section"><div class="section-label">Contact</div>
+          <div class="contact-block">
+            <div class="contact-name">Service de Médiation Pensions</div>
+            <div class="contact-line"><strong>📍</strong> Bd Simon Bolivar 30 bte 5 — 1000 Bruxelles</div>
+            <div class="contact-line"><strong>📞</strong> <a href="tel:022741990">02 274 19 90</a> (9h-12h)</div>
+            <div class="contact-line"><strong>🌐</strong> <a href="https://www.mediateurpensions.be" target="_blank">mediateurpensions.be</a></div>
+          </div>
+        </div>
+        <div class="note">💡 Tes courriers en cours suffisent à la condition de tentative préalable.</div>
+      </div>
+    </div>
 
 ```
-<div class="card low" data-id="mediateur">
+<div class="card medium">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="card-header-left">
-      <div class="card-title">
-        ⚖️ Médiateur fédéral Pensions
-        <span class="badge wait">Si nécessaire</span>
-      </div>
-      <div class="card-meta">Recours gratuit indépendant</div>
-    </div>
-    <span class="card-indicator">▼</span>
-  </div>
-  <div class="card-body">
-    <div class="section">
-      <div class="section-label">Actions</div>
-      <ul class="checklist">
-        <li><input type="checkbox" id="c-med-1"><label for="c-med-1">Attendre 30-45 jours la réponse SFP</label></li>
-        <li><input type="checkbox" id="c-med-2"><label for="c-med-2">Si réponse insuffisante : saisine formelle</label></li>
-        <li><input type="checkbox" id="c-med-3"><label for="c-med-3">Remplir formulaire en ligne</label></li>
-        <li><input type="checkbox" id="c-med-4"><label for="c-med-4">Joindre tous les courriers SFP + pièces médicales</label></li>
-      </ul>
-    </div>
-    <div class="section">
-      <div class="section-label">Contact</div>
-      <div class="contact-block">
-        <div class="contact-name">Service de Médiation Pensions</div>
-        <div class="contact-line"><strong>📍</strong> Bd Simon Bolivar 30 bte 5 — 1000 Bruxelles</div>
-        <div class="contact-line"><strong>📞</strong> <a href="tel:022741990">02 274 19 90</a> (9h-12h)</div>
-        <div class="contact-line"><strong>🌐</strong> <a href="https://www.mediateurpensions.be" target="_blank">mediateurpensions.be</a></div>
-      </div>
-    </div>
-    <div class="note">💡 Tes courriers en cours suffisent à la condition de tentative préalable.</div>
-  </div>
-</div>
-
-<div class="card medium" data-id="protjur">
-  <div class="card-header" onclick="toggleCard(this)">
-    <div class="card-header-left">
-      <div class="card-title">
-        🛡️ Protection juridique
-        <span class="badge go">À activer</span>
-      </div>
+      <div class="card-title">🛡️ Protection juridique <span class="badge go">À activer</span></div>
       <div class="card-meta">Médecin expert pour aggravation IPP</div>
     </div>
     <span class="card-indicator">▼</span>
   </div>
   <div class="card-body">
-    <div class="section">
-      <div class="section-label">Actions</div>
+    <div class="section"><div class="section-label">Actions</div>
       <ul class="checklist">
         <li><input type="checkbox" id="c-pj-1"><label for="c-pj-1">Contacter ton assurance protection juridique</label></li>
         <li><input type="checkbox" id="c-pj-2"><label for="c-pj-2">Activer la mission "médecin expert aggravation IPP"</label></li>
@@ -787,8 +407,7 @@ margin-top: 40px;
         <li><input type="checkbox" id="c-pj-4"><label for="c-pj-4">Coordonner avec Me De Boyer</label></li>
       </ul>
     </div>
-    <div class="section">
-      <div class="section-label">Contact</div>
+    <div class="section"><div class="section-label">Contact</div>
       <div class="contact-block">
         <div class="contact-name">Assurance protection juridique</div>
         <div class="contact-line warning">⚠️ Coordonnées à compléter — vérifie tes contrats</div>
@@ -797,28 +416,23 @@ margin-top: 40px;
   </div>
 </div>
 
-<div class="card low" data-id="tribunal">
+<div class="card low">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="card-header-left">
-      <div class="card-title">
-        ⚖️ Tribunal du travail
-        <span class="badge wait">Dernier recours</span>
-      </div>
+      <div class="card-title">⚖️ Tribunal du travail <span class="badge wait">Dernier recours</span></div>
       <div class="card-meta">Si tout échoue</div>
     </div>
     <span class="card-indicator">▼</span>
   </div>
   <div class="card-body">
-    <div class="section">
-      <div class="section-label">Points clés</div>
+    <div class="section"><div class="section-label">Points clés</div>
       <ul class="checklist">
         <li><input type="checkbox" id="c-trib-1"><label for="c-trib-1"><strong>Délai : 3 mois</strong> à compter d'une décision SFP formelle</label></li>
         <li><input type="checkbox" id="c-trib-2"><label for="c-trib-2">Mandater avocat via CGSP ou protection juridique</label></li>
         <li><input type="checkbox" id="c-trib-3"><label for="c-trib-3">Préparer dossier complet (médical + administratif)</label></li>
       </ul>
     </div>
-    <div class="section">
-      <div class="section-label">Juridiction compétente</div>
+    <div class="section"><div class="section-label">Juridiction compétente</div>
       <div class="contact-block">
         <div class="contact-name">Tribunal du travail de Liège</div>
         <div class="contact-line warning">⚠️ Division Huy ou Liège — à confirmer (Nandrin)</div>
@@ -831,36 +445,25 @@ margin-top: 40px;
   </div>
 </div>
 
-<!-- FLÈCHE 3→4 -->
+<div class="phase-arrow"><span style="color:#6b5a2a;">⬇</span></div>
 
-<div class="phase-arrow">
-  <span style="color:#6b5a2a; filter: drop-shadow(0 2px 4px rgba(107,90,42,0.4));">⬇</span>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     PHASE 4
-════════════════════════════════════════════ -->
+<!-- PHASE 4 — INVENTAIRE -->
 
 <div class="phase phase-4">
-  <div class="phase-title">
-    <span class="phase-number">4</span>
-    Inventaire des pièces du dossier
-  </div>
+  <div class="phase-title"><span class="phase-number">4</span>Inventaire des pièces du dossier</div>
   <div class="cards">
 
 ```
-<div class="card done" data-id="pieces-ok">
+<!-- PIÈCES ACQUISES — Rapport Boxho complet inclus -->
+<div class="card done">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="card-header-left">
-      <div class="card-title">
-        📁 Pièces en ma possession
-        <span class="badge done">Acquis</span>
-      </div>
+      <div class="card-title">📁 Pièces en ma possession <span class="badge done">Acquis</span></div>
     </div>
     <span class="card-indicator">▼</span>
   </div>
   <div class="card-body">
-    <ul class="checklist">
+    <ul class="checklist" id="list-acquired">
       <li><input type="checkbox" id="p-ok-1" checked><label for="p-ok-1">Rapport MEDEX 30/05/2024 (60% IPP)</label></li>
       <li><input type="checkbox" id="p-ok-2" checked><label for="p-ok-2">Courrier SFP 05/03/2026 (2.633,58 €/mois)</label></li>
       <li><input type="checkbox" id="p-ok-3" checked><label for="p-ok-3">Décompte SFP 28/04/2026 (rente AT à 0 €)</label></li>
@@ -870,28 +473,27 @@ margin-top: 40px;
       <li><input type="checkbox" id="p-ok-7" checked><label for="p-ok-7">Annexe rapport définitif Pr Boxho 13/04/2026</label></li>
       <li><input type="checkbox" id="p-ok-8" checked><label for="p-ok-8">Courrier Dr Somja 31/03/2026 (aggravation)</label></li>
       <li><input type="checkbox" id="p-ok-9" checked><label for="p-ok-9">Décision DGPH 66% / 9 points + carte PMR</label></li>
+      <li><input type="checkbox" id="p-ok-10" checked><label for="p-ok-10"><strong>Rapport définitif Pr Boxho complet</strong> (33 p.) — EXP2157642 ✅</label></li>
     </ul>
   </div>
 </div>
 
-<div class="card urgent" data-id="pieces-todo">
+<!-- PIÈCES À OBTENIR — migration automatique au cochage -->
+<div class="card urgent">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="card-header-left">
-      <div class="card-title">
-        📁 Pièces à obtenir
-        <span class="badge go">En cours</span>
-      </div>
+      <div class="card-title">📁 Pièces à obtenir <span class="badge go">En cours</span></div>
     </div>
     <span class="card-indicator">▼</span>
   </div>
   <div class="card-body">
-    <ul class="checklist">
-      <li><input type="checkbox" id="p-todo-1"><label for="p-todo-1"><strong>Rapport définitif Pr Boxho complet</strong> (33 p.) — via Me De Boyer</label></li>
-      <li><input type="checkbox" id="p-todo-2"><label for="p-todo-2">Attestation actualisée Dr Somja (capacité de travail)</label></li>
-      <li><input type="checkbox" id="p-todo-3"><label for="p-todo-3">Courrier de consultation Dr Timmermans</label></li>
-      <li><input type="checkbox" id="p-todo-4"><label for="p-todo-4">Décision CAPSP officielle de mise à la pension</label></li>
-      <li><input type="checkbox" id="p-todo-5"><label for="p-todo-5">Éventuel nouveau bilan neuropsychologique</label></li>
+    <ul class="checklist" id="list-todo">
+      <li data-label="Attestation actualisée Dr Somja sur capacité de travail générale"><input type="checkbox" id="p-todo-2"><label for="p-todo-2">Attestation actualisée Dr Somja sur capacité de travail générale</label></li>
+      <li data-label="Courrier de consultation Dr Timmermans"><input type="checkbox" id="p-todo-3"><label for="p-todo-3">Courrier de consultation Dr Timmermans</label></li>
+      <li data-label="Décision CAPSP officielle de mise à la pension d'office"><input type="checkbox" id="p-todo-4"><label for="p-todo-4">Décision CAPSP officielle de mise à la pension d'office</label></li>
+      <li data-label="Éventuel nouveau bilan neuropsychologique (pour aggravation)"><input type="checkbox" id="p-todo-5"><label for="p-todo-5">Éventuel nouveau bilan neuropsychologique (pour aggravation)</label></li>
     </ul>
+    <div class="note" id="todo-empty" style="display:none;">✅ Tous les documents ont été acquis !</div>
   </div>
 </div>
 ```
@@ -916,14 +518,13 @@ margin-top: 40px;
 </div>
 
 <div class="footer">
-  Tableau de bord — Jérôme Richy — Mis à jour le 11/05/2026<br>
+  Tableau de bord — Jérôme Richy — Mis à jour le 13/05/2026<br>
   Dossier déplafonnement rente AT · Réf. 74.10.10-017.46
 </div>
 
 <!-- DOCUMENTS CACHÉS -->
 
 <div id="docs" style="display:none;">
-
 <div id="doc-fgtb" data-title="Mail à la CGSP-Police / FGTB">Objet : URGENT - Demande d'assistance juridique - Pensionné FGTB - Litige SFP rente AT
 
 Bonjour,
@@ -985,7 +586,7 @@ Depuis le 1er mai 2026, je suis pensionné d’office à titre temporaire pour i
 
 Le Service fédéral des Pensions justifie le maintien d’un plafonnement de ma rente d’accident du travail (à 25 % au lieu des 60 % d’IPP reconnus) au motif que ma pension est administrativement « temporaire » et qu’une « reprise du travail reste possible ». Cette position entraîne pour moi une perte financière mensuelle substantielle.
 
-Dans le cadre de mes démarches en cours auprès du SFP, du Médiateur fédéral des Pensions, de la CAPSP et, le cas échéant, des juridictions du travail, je sollicite votre appréciation médicale honnête sur les deux points suivants :
+Dans le cadre de mes démarches en cours, je sollicite votre appréciation médicale honnête sur les deux points suivants :
 
 - Compte tenu du tableau clinique actuel (douleurs chroniques résistantes, céphalées invalidantes en aggravation, troubles cognitifs, fatigue chronique, traitement de palier 3 avec perfusions mensuelles de kétamine et magnésium, polymédication associée), ma situation permet-elle d’envisager raisonnablement une reprise d’activité professionnelle, même partielle ou reconvertie ?
 - L’évolution observée depuis la consolidation du 1er avril 2024 va-t-elle dans le sens d’une récupération ou au contraire d’une stabilisation voire d’une aggravation ?
@@ -1104,19 +705,17 @@ a) Rapport définitif Pr Philippe BOXHO (13/04/2026, n° EXP2157642) :
 - Incapacité économique permanente partielle : 60%
 - Incapacité personnelle permanente partielle : 40%
 - Incapacité ménagère permanente partielle : 40%
-- Consolidation au 01/07/2021
-- Absence d’état antérieur
-- Réserves pour aggravation ultérieure
-- Sur le plan neuropsychologique (Pr Meulemans, ULiège) : impossibilité de toute activité exigeante sur le plan attentionnel ou communicationnel
+- Consolidation au 01/07/2021 — Absence d’état antérieur
+- Sur le plan neuropsychologique : impossibilité de toute activité exigeante sur le plan attentionnel ou communicationnel
 
 b) Aggravation documentée par Dr G. SOMJA (courrier du 31/03/2026) :
-Dégradation clinique malgré traitement bien conduit. Céphalées en aggravation, paresthésies, troubles de concentration. Instauration récente d’une thérapie aux anticorps monoclonaux anti-CGRP (Dr Timmermans, CHR Citadelle) — traitement de dernière ligne.
+Dégradation clinique malgré traitement bien conduit. Instauration récente d’une thérapie aux anticorps monoclonaux anti-CGRP (Dr Timmermans, CHR Citadelle) — traitement de dernière ligne.
 
 c) Reconnaissance DGPH : handicap 66% / 9 points — carte de stationnement PMR.
 
 1. Caractère irréversible
 
-L’ensemble de ces éléments établit que mon inaptitude est définitive, que mon état se dégrade, et que la qualification administrative « temporaire » ne repose sur aucun fondement médical.
+Mon inaptitude est définitive, mon état se dégrade, et la qualification administrative « temporaire » ne repose sur aucun fondement médical.
 
 1. Demandes
 
@@ -1124,79 +723,122 @@ a) Convoquer un nouvel examen CAPSP pour constater le caractère définitif de m
 b) Convertir ma pension temporaire en pension définitive avec effet au 1er mai 2026 ;
 c) M’indiquer les pièces complémentaires éventuellement requises.
 
-Jérôme RICHY
-Premier Inspecteur de police pensionné
+Jérôme RICHY — Premier Inspecteur de police pensionné
 
 Annexes :
 
 - Rapport MEDEX du 30/05/2024
 - Rapport Pr Boxho du 13/04/2026 (EXP2157642)
 - Courrier Dr Somja du 31/03/2026
-- Décision DGPH
-- Décision CAPSP de mise à la pension</div>
+- Décision DGPH — Décision CAPSP de mise à la pension</div>
 
 </div>
 
 <script>
-  // Sauvegarde localStorage
-  function save(id, val) {
-    try { localStorage.setItem('jr-' + id, val ? '1' : '0'); } catch(e) {}
-  }
-  function load(id) {
-    try { const v = localStorage.getItem('jr-' + id); return v === null ? null : v === '1'; } catch(e) { return null; }
+  function save(id, val) { try { localStorage.setItem('jr-' + id, val); } catch(e) {} }
+  function load(id) { try { return localStorage.getItem('jr-' + id); } catch(e) { return null; } }
+
+  // Migration automatique : cocher dans "à obtenir" → apparaît dans "acquis"
+  function migrateItem(li) {
+    const label = li.getAttribute('data-label') || li.querySelector('label').textContent.trim();
+    const cbId  = li.querySelector('input').id;
+
+    li.style.transition = 'opacity 0.4s, transform 0.4s';
+    li.style.opacity = '0';
+    li.style.transform = 'translateX(30px)';
+
+    setTimeout(() => {
+      li.remove();
+      checkTodoEmpty();
+
+      const newId = 'migrated-' + Date.now();
+      const newLi = document.createElement('li');
+      newLi.innerHTML = `<input type="checkbox" id="${newId}" checked><label for="${newId}">${label} ✅</label>`;
+      newLi.style.opacity = '0';
+      document.getElementById('list-acquired').appendChild(newLi);
+
+      save(newId, 'acquired');
+      save(cbId, 'migrated');
+
+      // Ouvrir la carte acquis si fermée
+      const acquiredCard = document.getElementById('list-acquired').closest('.card');
+      if (!acquiredCard.classList.contains('open')) acquiredCard.classList.add('open');
+
+      setTimeout(() => {
+        newLi.style.transition = 'opacity 0.4s';
+        newLi.style.opacity = '1';
+        newLi.style.animation = 'flashGreen 2s ease';
+      }, 50);
+
+      updateProgress();
+    }, 450);
   }
 
+  function checkTodoEmpty() {
+    const n = document.querySelectorAll('#list-todo li').length;
+    document.getElementById('todo-empty').style.display = n === 0 ? 'block' : 'none';
+  }
+
+  // Init cases
   document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     const saved = load(cb.id);
-    if (saved !== null) cb.checked = saved;
-    cb.addEventListener('change', () => { save(cb.id, cb.checked); updateProgress(); });
+    if (saved === 'migrated') {
+      // Ce document a migré — masquer son li s'il est encore là
+      const li = cb.closest('li');
+      if (li && li.closest('#list-todo')) li.remove();
+      return;
+    }
+    if (saved === '1') cb.checked = true;
+    if (saved === '0') cb.checked = false;
+
+    if (cb.closest('#list-todo')) {
+      cb.addEventListener('change', function() {
+        if (this.checked) { save(this.id, '1'); migrateItem(this.closest('li')); }
+      });
+    } else {
+      cb.addEventListener('change', function() {
+        save(this.id, this.checked ? '1' : '0');
+        updateProgress();
+      });
+    }
   });
 
+  // Sauvegarder les pré-cochées
   document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
-    if (load(cb.id) === null) save(cb.id, true);
+    if (!load(cb.id)) save(cb.id, '1');
   });
 
-  function toggleCard(header) {
-    header.parentElement.classList.toggle('open');
-  }
+  function toggleCard(header) { header.parentElement.classList.toggle('open'); }
 
   function updateProgress() {
-    const all = document.querySelectorAll('input[type="checkbox"]');
-    const done = document.querySelectorAll('input[type="checkbox"]:checked');
-    document.getElementById('progress').style.width = (all.length > 0 ? (done.length / all.length) * 100 : 0) + '%';
+    const all  = document.querySelectorAll('input[type="checkbox"]').length;
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    document.getElementById('progress').style.width = (all > 0 ? (done / all) * 100 : 0) + '%';
   }
   updateProgress();
+  checkTodoEmpty();
 
-  let currentDocText = '';
+  let docText = '';
   function showDoc(id) {
-    const doc = document.getElementById(id);
-    if (!doc) return;
-    currentDocText = doc.textContent.trim();
-    document.getElementById('modal-title').textContent = doc.getAttribute('data-title') || 'Document';
-    document.getElementById('modal-body').textContent = currentDocText;
+    const d = document.getElementById(id);
+    if (!d) return;
+    docText = d.textContent.trim();
+    document.getElementById('modal-title').textContent = d.getAttribute('data-title') || 'Document';
+    document.getElementById('modal-body').textContent = docText;
     document.getElementById('modal').classList.add('active');
   }
-
   function closeModal() { document.getElementById('modal').classList.remove('active'); }
-
   function copyDoc() {
-    if (!currentDocText) return;
-    navigator.clipboard.writeText(currentDocText)
-      .then(() => alert('Copié dans le presse-papier !'))
-      .catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = currentDocText;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        alert('Document copié !');
-      });
+    navigator.clipboard.writeText(docText).then(() => alert('Copié !')).catch(() => {
+      const t = document.createElement('textarea');
+      t.value = docText; document.body.appendChild(t); t.select();
+      document.execCommand('copy'); document.body.removeChild(t); alert('Copié !');
+    });
   }
-
   document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 
 </body>
 </html>
+
